@@ -1,1 +1,0 @@
-# seintech-website
