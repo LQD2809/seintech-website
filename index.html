@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEINTECH - Công Nghệ Đánh Bóng, Mài & Tự Động Hóa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Flag Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#00a859',
+                            darkgreen: '#007a40',
+                            navy: '#0f172a',
+                            accent: '#10b981',
+                            gray: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(0, 168, 89, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 border-2 border-brand-green shadow-lg">
+                        <i class="fa-solid me-1 fa-gear text-brand-green text-2xl group-hover:rotate-180 transition-transform duration-700"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black text-white tracking-wider block leading-none">SEIN<span class="text-brand-green">TECH</span></span>
+                        <span class="text-[10px] text-slate-300 uppercase tracking-widest font-medium">Engineering Services</span>
+                    </div>
+                </a> 
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-200">
+                    <a href="#about" data-i18n="nav.about" class="hover:text-brand-green transition-colors">Giới Thiệu</a>
+                    <a href="#products" data-i18n="nav.products" class="hover:text-brand-green transition-colors">Sản Phẩm & Dịch Vụ</a>
+                    <a href="#contact" data-i18n="nav.contact" class="hover:text-brand-green transition-colors">Liên Hệ</a>
+                </nav>
+
+                <!-- Right Side: Admin Button, Language Switcher & Hotline -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    
+                    <!-- NÚT QUẢN TRỊ VIÊN -->
+                    <button onclick="openAdminModal()" class="bg-slate-800 hover:bg-slate-700 text-brand-green border border-brand-green/40 px-3.5 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span data-i18n="nav.admin">Quản Trị</span>
+                        <span id="lead-badge" class="hidden bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+                    </button>
+
+                    <!-- LANGUAGE SWITCHER DROPDOWN -->
+                    <div class="relative inline-block text-left">
+                        <button id="lang-btn" onclick="toggleLangDropdown(event)" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-medium py-2 px-3 rounded-lg text-sm transition-all focus:outline-none">
+                            <span id="current-flag" class="fi fi-vn rounded-sm"></span>
+                            <span id="current-lang-text">TIẾNG VIỆT</span>
+                            <i class="fa-solid fa-chevron-down text-xs ml-1 text-slate-400"></i>
+                        </button>
+
+                        <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-44 rounded-xl shadow-2xl bg-slate-900 border border-slate-700 ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
+                            <div class="py-1">
+                                <button onclick="changeLanguage('vi', 'fi-vn', 'TIẾNG VIỆT')" class="w-full text-left px-4 py-2.5 text-sm text-slate-200 hover:bg-brand-green hover:text-white flex items-center gap-3 transition-colors">
+                                    <span class="fi fi-vn rounded-sm text-base"></span> Tiếng Việt
+                                </button>
+                                <button onclick="changeLanguage('en', 'fi-gb', 'ENGLISH')" class="w-full text-left px-4 py-2.5 text-sm text-slate-200 hover:bg-brand-green hover:text-white flex items-center gap-3 transition-colors">
+                                    <span class="fi fi-gb rounded-sm text-base"></span> English
+                                </button>
+                                <button onclick="changeLanguage('ko', 'fi-kr', '한국어')" class="w-full text-left px-4 py-2.5 text-sm text-slate-200 hover:bg-brand-green hover:text-white flex items-center gap-3 transition-colors">
+                                    <span class="fi fi-kr rounded-sm text-base"></span> 한국어
+                                </button>
+                                <button onclick="changeLanguage('zh', 'fi-cn', '中文')" class="w-full text-left px-4 py-2.5 text-sm text-slate-200 hover:bg-brand-green hover:text-white flex items-center gap-3 transition-colors">
+                                    <span class="fi fi-cn rounded-sm text-base"></span> 中文
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hotline CTA -->
+                    <a href="tel:0968049859" class="bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 px-5 rounded-full shadow-lg hover:shadow-green-500/30 transition-all flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-phone animate-bounce"></i>
+                        <span>0968 049 859</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-navy border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" data-i18n="nav.about" class="block text-slate-200 hover:text-brand-green py-2 font-medium">Giới Thiệu</a>
+            <a href="#products" data-i18n="nav.products" class="block text-slate-200 hover:text-brand-green py-2 font-medium">Sản Phẩm & Dịch Vụ</a>
+            <a href="#contact" data-i18n="nav.contact" class="block text-slate-200 hover:text-brand-green py-2 font-medium">Liên Hệ</a>
+            
+            <button onclick="openAdminModal()" class="w-full text-left bg-slate-800 text-brand-green font-semibold py-2 px-3 rounded flex items-center justify-between">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-user-shield"></i> <span data-i18n="nav.admin">Quản Trị</span>
+                </span>
+                <span id="mobile-lead-badge" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
+            </button>
+
+            <!-- Mobile Language Selector -->
+            <div class="pt-2 border-t border-slate-800">
+                <p class="text-xs text-slate-400 mb-2">Ngôn ngữ / Language:</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="changeLanguage('vi', 'fi-vn', 'TIẾNG VIỆT')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
+                        <span class="fi fi-vn"></span> Tiếng Việt
+                    </button>
+                    <button onclick="changeLanguage('en', 'fi-gb', 'ENGLISH')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
+                        <span class="fi fi-gb"></span> English
+                    </button>
+                    <button onclick="changeLanguage('ko', 'fi-kr', '한국어')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
+                        <span class="fi fi-kr"></span> 한국어
+                    </button>
+                    <button onclick="changeLanguage('zh', 'fi-cn', '中文')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
+                        <span class="fi fi-cn"></span> 中文
+                    </button>
+                </div>
+            </div>
+
+            <a href="tel:0968049859" class="block text-center bg-brand-green text-white font-bold py-2.5 rounded-full shadow mt-4">
+                <i class="fa-solid fa-phone mr-2"></i> Hotline: 0968 049 859
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg min-h-screen flex items-center pt-24 pb-16 relative text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-brand-green/20 border border-brand-green text-brand-green px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+                    <i class="fa-solid fa-circle-check"></i> <span data-i18n="hero.badge">Giải Pháp Hoàn Thiện Bề Mặt Cho Nhà Máy Sản Xuất</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                    <span data-i18n="hero.title1">CÔNG NGHỆ ĐÁNH BÓNG, MÀI &</span> <span class="text-brand-green" data-i18n="hero.title2">TỰ ĐỘNG HÓA</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed" data-i18n="hero.desc">
+                    SEINTECH mang đến giải pháp tối ưu cho dây chuyền sản xuất, nâng cao hiệu suất gia công, tuổi thọ thiết bị và chuẩn hóa chất lượng bề mặt chuẩn công nghiệp.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="bg-brand-green hover:bg-brand-darkgreen text-white font-bold px-8 py-4 rounded-lg shadow-lg text-center transition-all flex items-center justify-center gap-2">
+                        <span data-i18n="hero.btn1">Tư Vấn & Khảo Sát Miễn Phí</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#products" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-8 py-4 rounded-lg text-center transition-all backdrop-blur-sm" data-i18n="hero.btn2">
+                        Khám Phá Sản Phẩm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GIỚI THIỆU / ABOUT -->
+    <section id="about" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-i18n="about.tag">Về Chúng Tôi</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2 mb-6" data-i18n="about.title">
+                        Đồng Hành Cùng Doanh Nghiệp Trên Mọi Chặng Đường Phát Triển
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed mb-6" data-i18n="about.p1">
+                        CÔNG TY TNHH SEINTECH là đối tác kỹ thuật đáng tin cậy chuyên cung cấp các giải pháp công nghệ máy móc công nghiệp, hệ thống xử lý bề mặt và tự động hóa toàn diện cho nhà máy.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed mb-8" data-i18n="about.p2">
+                        Chúng tôi giúp các doanh nghiệp sản xuất tối ưu chi phí, nâng cao chất lượng gia công từ vật liệu mài mòn, máy phun cát đến giải pháp ứng dụng Robot tự động hóa AI hiện đại.
+                    </p>
+                </div>
+                <div class="relative">
+                    <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80" alt="SEINTECH Industrial Solution" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SẢN PHẨM & DỊCH VỤ -->
+    <section id="products" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-i18n="products.tag">Danh Mục Cung Cấp</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-2" data-i18n="products.title">Sản Phẩm & Giải Pháp Chủ Lực</h2>
+            </div>
+
+            <!-- CHỨA DANH MỤC CÂY SẢN PHẨM ĐỘNG -->
+            <div id="product-category-tree" class="space-y-16">
+                <!-- Render từ JS -->
+            </div>
+        </div>
+    </section>
+
+<!-- LIÊN HỆ / CONTACT -->
+<section id="contact" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        
+        <!-- LƯỚI 2 CỘT CHUẨN (Đã sửa lỗi cú pháp << và chia 12 phần) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start w-full">
+            
+            <!-- CỘT TRÁI: THÔNG TIN LIÊN HỆ (Địa chỉ, Hotline, Email, Facebook) - Chiếm 5 phần -->
+            <div class="md:col-span-5 space-y-6">
+                <div>
+                    <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-i18n="contact.tag">Thông Tin Liên Hệ</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2 mb-6" data-i18n="contact.title">Liên Hệ Với Chúng Tôi</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Địa chỉ -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-slate-900" data-i18n="contact.address">Địa chỉ:</h5>
+                            <p class="text-slate-600 text-sm mt-1 leading-relaxed">128 Huy Cận, Khu Dân Cư Gia Hòa, Phước Long B, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+                        </div>
+                    </div>
+
+                    <!-- Hotline / Zalo -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-slate-900" data-i18n="contact.phone">Hotline / Zalo:</h5>
+                            <p class="text-slate-600 text-sm mt-1"><a href="tel:0968049859" class="hover:text-brand-green font-semibold">0968 049 859</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-slate-900">Email:</h5>
+                            <p class="text-slate-600 text-sm mt-1"><a href="mailto:seintechvina@gmail.com" class="hover:text-brand-green font-semibold">seintechvina@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Facebook (Đã thêm vào cột trái) -->
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-slate-900">Fanpage Facebook:</h5>
+                            <p class="text-slate-600 text-sm mt-1"><a href="https://web.facebook.com/seintech" target="_blank" class="hover:text-brand-green font-semibold">facebook.com/seintech</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- (Đã đóng đúng thẻ div của cột trái tại đây) -->
+
+            <!-- CỘT PHẢI: FORM YÊU CẦU BÁO GIÁ / TƯ VẤN - Chiếm 7 phần -->
+            <div class="md:col-span-7 bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6" data-i18n="contact.form_title">Yêu Cầu Báo Giá / Tư Vấn</h3>
+                <form id="consultForm" onsubmit="handleCustomerSubmit(event)" class="space-y-4">
+                    <div>
+                        <input type="text" id="custName" required placeholder="Họ và tên *" class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-sm">
+                    </div>
+                    <div>
+                        <input type="tel" id="custPhone" required placeholder="Số điện thoại / Zalo *" class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-sm">
+                    </div>
+                    <div>
+                        <select id="custProduct" class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-slate-600 text-sm bg-white">
+                            <option value="Chưa chọn">-- Chọn sản phẩm quan tâm --</option>
+                            <option value="Đai Mài Nhám & Vật Liệu Mài">Đai Mài Nhám & Vật Liệu Mài</option>
+                            <option value="Máy Phun Cát (Sand Blast)">Máy Phun Cát (Sand Blast)</option>
+                            <option value="Hệ Thống Tự Động Hóa & AI">Hệ Thống Tự Động Hóa & AI</option>
+                        </select>
+                    </div>
+                    <div>
+                        <textarea id="custNote" rows="3" placeholder="Ghi chú thêm về nhà máy/sản phẩm..." class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-3.5 rounded-lg shadow-lg transition-colors text-sm" data-i18n="contact.send_btn">Gửi Yêu Cầu Tư Vấn</button>
+                </form>
+            </div>
+
+        </div> <!-- Đóng thẻ grid -->
+    </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-navy text-slate-400 py-8 border-t border-slate-800 text-center text-xs">
+        &copy; 2026 CÔNG TY TNHH SEINTECH. All Rights Reserved (by Seintech_LQD).
+    </footer>
+
+    <!-- POPUP MODAL QUẢN TRỊ VIÊN (ADMIN) -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        
+        <!-- CARD ĐĂNG NHẬP -->
+        <div id="loginCard" class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-200">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-2xl mx-auto mb-3">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900" data-i18n="admin.login_title">Đăng Nhập Quản Trị</h3>
+                <p class="text-xs text-slate-500 mt-1" data-i18n="admin.login_sub">Vui lòng chọn tài khoản và nhập mật khẩu</p>
+            </div>
+            
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="admin.role">Loại tài khoản</label>
+                    <select id="loginRole" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 outline-none bg-white text-sm font-medium">
+                        <option value="superadmin">👑 Super Admin (Cao Cấp)</option>
+                        <option value="editor">👔 Editor (Biên Tập Viên)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="admin.pass">Mật khẩu quản trị</label>
+                    <input type="password" id="adminPassword" required placeholder="••••••••••••" class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green">
+                </div>
+                <div id="loginError" class="text-red-500 text-xs hidden font-semibold">Mật khẩu sai! Vui lòng thử lại.</div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeAdminModal()" class="w-1/2 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-sm transition-colors" data-i18n="admin.cancel">Hủy</button>
+                    <button type="submit" class="w-1/2 py-3 bg-brand-green hover:bg-brand-darkgreen text-white font-bold rounded-lg text-sm shadow-md transition-colors" data-i18n="admin.login_btn">Đăng Nhập</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- CARD DASHBOARD ADMIN -->
+        <div id="adminDashboard" class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 border border-slate-200 hidden">
+            <div class="flex justify-between items-center border-b pb-4 mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-brand-green"></i> <span data-i18n="admin.dash_title">Hệ Thống Quản Trị SEINTECH</span>
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1"><span data-i18n="admin.logged_as">Đang đăng nhập với quyền:</span> <span id="currentRoleBadge" class="font-bold text-brand-green uppercase"></span></p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <!-- NÚT ĐĂNG XUẤT -->
+                    <button onclick="handleLogout()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="admin.logout">Đăng Xuất</span>
+                    </button>
+                    <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+                </div>
+            </div>
+
+            <!-- THANH TABS CHUYỂN ĐỔI QUẢN LÝ -->
+            <div class="flex border-b mb-6 space-x-4 overflow-x-auto">
+                <button id="tabBtnLeads" onclick="switchAdminTab('leads')" class="pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm flex items-center gap-2 shrink-0">
+                    <i class="fa-solid fa-users"></i> <span data-i18n="admin.tab_leads">Khách Hàng Đăng Ký</span>
+                    <span id="tab-lead-count" class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full">0</span>
+                </button>
+                <button id="tabBtnProducts" onclick="switchAdminTab('products')" class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm flex items-center gap-2 shrink-0">
+                    <i class="fa-solid fa-boxes-stacked"></i> <span data-i18n="admin.tab_products">Quản Lý Cây Sản Phẩm</span>
+                </button>
+                <button id="tabBtnEditorMgmt" onclick="switchAdminTab('editormgmt')" class="hidden pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm items-center gap-2 shrink-0">
+                    <i class="fa-solid fa-user-gear"></i> <span data-i18n="admin.tab_editor">Cài Đặt Editor</span>
+                </button>
+                <button id="tabBtnAccount" onclick="switchAdminTab('account')" class="hidden pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm items-center gap-2 shrink-0">
+                    <i class="fa-solid fa-key"></i> <span data-i18n="admin.tab_pass">Đổi Mật Khẩu Admin</span>
+                </button>
+            </div>
+
+            <!-- TAB 1: DANH SÁCH KHÁCH HÀNG ĐĂNG KÝ TƯ VẤN -->
+            <div id="tabLeads">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="font-bold text-slate-800 text-sm">Danh Sách Yêu Cầu Báo Giá Từng Khách Hàng</h4>
+                    <button id="clearLeadsBtn" onclick="clearAllLeads()" class="text-xs text-red-600 hover:underline">Xóa tất cả danh sách</button>
+                </div>
+                <div class="overflow-x-auto border rounded-xl">
+                    <table class="w-full text-left text-sm text-slate-600 border-collapse">
+                        <thead class="bg-slate-100 text-slate-700 uppercase text-[11px] font-bold">
+                            <tr>
+                                <th class="p-3 border-b">STT</th>
+                                <th class="p-3 border-b">Họ & Tên</th>
+                                <th class="p-3 border-b">SĐT / Zalo</th>
+                                <th class="p-3 border-b">Sản Phẩm Quan Tâm</th>
+                                <th class="p-3 border-b">Ghi Chú</th>
+                                <th class="p-3 border-b">Thời Gian</th>
+                                <th class="p-3 border-b text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadTableBody">
+                            <!-- Đổ từ JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 2: QUẢN LÝ DANH MỤC LỚN VÀ CÁC SẢN PHẨM CON -->
+            <div id="tabProducts" class="hidden">
+                <!-- FORM TẠO DANH MỤC LỚN MỚI -->
+                <div id="addCatContainer" class="bg-slate-50 p-4 rounded-xl border mb-6">
+                    <h5 class="font-bold text-slate-800 text-xs uppercase mb-3 text-brand-green flex items-center gap-1.5">
+                        <i class="fa-solid fa-folder-plus"></i> Tạo Danh Mục Sản Phẩm Lớn Mới (Tự Động Dịch 4 Ngôn Ngữ)
+                    </h5>
+                    <form onsubmit="handleAddCategory(event)" class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="catTitle" required placeholder="Nhập tên danh mục lớn bằng Tiếng Việt (ví dụ: Máy Phun Cát...)" class="flex-1 px-3 py-2 border rounded-lg text-sm outline-none bg-white">
+                        <button type="submit" id="btnCreateCat" class="bg-brand-navy hover:bg-slate-800 text-white font-bold px-5 py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Tạo Danh Mục
+                        </button>
+                    </form>
+                </div>
+
+                <!-- FORM THÊM SẢN PHẨM CON VÀO DANH MỤC -->
+                <div class="bg-slate-50 p-5 rounded-xl border mb-8">
+                    <h5 class="font-bold text-slate-800 text-xs uppercase mb-4 text-brand-green flex items-center gap-1.5">
+                        <i class="fa-solid fa-box-archive"></i> Thêm Sản Phẩm Con (Tự Động Dịch 4 Ngôn Ngữ)
+                    </h5>
+                    <form onsubmit="handleAddSubProduct(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Chọn danh mục lớn *</label>
+                            <select id="subCatSelect" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
+                                <!-- Đổ danh mục vào đây -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tên sản phẩm nhỏ *</label>
+                            <input type="text" id="subTitle" required placeholder="Ví dụ: Nhám đai Zirconia ZA #60" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tải ảnh sản phẩm (File từ máy)</label>
+                            <input type="file" id="subImgFile" accept="image/*" class="w-full px-2 py-1 border rounded-lg text-xs bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Hoặc dán Link ảnh URL</label>
+                            <input type="text" id="subImgUrl" placeholder="https://..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Mô tả đặc tính kỹ thuật *</label>
+                            <textarea id="subDesc" rows="2" required placeholder="Thông số kỹ thuật, ứng dụng..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
+                        </div>
+                        <div class="md:col-span-2 flex justify-end">
+                            <button type="submit" id="btnAddSub" class="bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 px-6 rounded-lg text-sm shadow flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Thêm Sản Phẩm Con
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- CÂY DANH MỤC HIỂN THỊ -->
+                <div id="adminCategoryTree" class="space-y-6">
+                    <!-- Render từ JS -->
+                </div>
+            </div>
+
+            <!-- TAB 3: CÀI ĐẶT & ĐỔI MẬT KHẨU EDITOR -->
+            <div id="tabEditorMgmt" class="hidden">
+                <div class="max-w-xl mx-auto bg-slate-50 p-6 rounded-xl border">
+                    <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-user-gear text-brand-green"></i> Quản Lý Mật Khẩu & Phân Quyền Editor
+                    </h4>
+                    <form onsubmit="handleSaveEditorSettings(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Đặt Mật Khẩu Mới Cho Editor (Super Admin đổi trực tiếp không cần mật khẩu cũ)</label>
+                            <input type="text" id="editEditorPass" placeholder="Nhập mật khẩu mới cho editor..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
+                        </div>
+                        <div class="border-t pt-4 space-y-3">
+                            <label class="block text-xs font-bold uppercase text-slate-700">Lựa chọn cấp quyền cho Editor:</label>
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="permDeleteLead" class="w-4 h-4 rounded text-brand-green focus:ring-brand-green">
+                                <span class="text-xs text-slate-700">Cho phép Editor xóa thông tin khách hàng đăng ký tư vấn</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="permAddCategory" class="w-4 h-4 rounded text-brand-green focus:ring-brand-green">
+                                <span class="text-xs text-slate-700">Cho phép Editor tạo hoặc xóa danh mục sản phẩm lớn</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 rounded-lg text-sm shadow mt-2">
+                            Lưu Thay Đổi Cho Editor
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- TAB 4: ĐỔI MẬT KHẨU SUPER ADMIN -->
+            <div id="tabAccount" class="hidden">
+                <div class="max-w-md mx-auto bg-slate-50 p-6 rounded-xl border">
+                    <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-key text-brand-green"></i> Đổi Mật Khẩu Super Admin
+                    </h4>
+                    <form onsubmit="handleChangeAdminPassword(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Mật khẩu hiện tại *</label>
+                            <input type="password" id="oldAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Mật khẩu mới *</label>
+                            <input type="password" id="newAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Xác nhận mật khẩu mới *</label>
+                            <input type="password" id="confirmAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                        </div>
+                        <div id="adminPassError" class="text-red-500 text-xs hidden font-semibold">Mật khẩu mới không trùng khớp hoặc sai mật khẩu hiện tại!</div>
+                        <button type="submit" class="w-full bg-brand-navy hover:bg-slate-800 text-white font-bold py-2.5 rounded-lg text-sm shadow">
+                            Cập Nhật Mật Khẩu Admin
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT HỆ THỐNG FULL -->
+    <script>
+        let currentLang = 'vi';
+
+        // 1. DỮ LIỆU DỊCH ĐA NGÔN NGỮ GIAO DIỆN & ADMIN
+        const translations = {
+            vi: {
+                "nav.about": "Giới Thiệu",
+                "nav.products": "Sản Phẩm & Dịch Vụ",
+                "nav.contact": "Liên Hệ",
+                "nav.admin": "Quản Trị",
+                "hero.badge": "Giải Pháp Hoàn Thiện Bề Mặt Cho Nhà Máy Sản Xuất",
+                "hero.title1": "CÔNG NGHỆ ĐÁNH BÓNG, MÀI &",
+                "hero.title2": "TỰ ĐỘNG HÓA",
+                "hero.desc": "SEINTECH mang đến giải pháp tối ưu cho dây chuyền sản xuất, nâng cao hiệu suất gia công, tuổi thọ thiết bị và chuẩn hóa chất lượng bề mặt chuẩn công nghiệp.",
+                "hero.btn1": "Tư Vấn & Khảo Sát Miễn Phí",
+                "hero.btn2": "Khám Phá Sản Phẩm",
+                "about.tag": "Về Chúng Tôi",
+                "about.title": "Đồng Hành Cùng Doanh Nghiệp Trên Mọi Chặng Đường Phát Triển",
+                "about.p1": "CÔNG TY TNHH SEINTECH là đối tác kỹ thuật đáng tin cậy chuyên cung cấp các giải pháp công nghệ máy móc công nghiệp, hệ thống xử lý bề mặt và tự động hóa toàn diện cho nhà máy.",
+                "about.p2": "Chúng tôi giúp các doanh nghiệp sản xuất tối ưu chi phí, nâng cao chất lượng gia công từ vật liệu mài mòn, máy phun cát đến giải pháp ứng dụng Robot tự động hóa AI hiện đại.",
+                "products.tag": "Danh Mục Cung Cấp",
+                "products.title": "Sản Phẩm & Giải Pháp Chủ Lực",
+                "contact.tag": "Thông Tin Liên Hệ",
+                "contact.title": "Liên Hệ Với Chúng Tôi",
+                "contact.address": "Địa chỉ:",
+                "contact.form_title": "Yêu Cầu Báo Giá / Tư Vấn",
+                "contact.send_btn": "Gửi Yêu Cầu Tư Vấn",
+                "admin.login_title": "Đăng Nhập Quản Trị",
+                "admin.login_sub": "Vui lòng chọn tài khoản và nhập mật khẩu",
+                "admin.role": "Loại tài khoản",
+                "admin.pass": "Mật khẩu quản trị",
+                "admin.cancel": "Hủy",
+                "admin.login_btn": "Đăng Nhập",
+                "admin.dash_title": "Hệ Thống Quản Trị SEINTECH",
+                "admin.logged_as": "Đang đăng nhập với quyền:",
+                "admin.logout": "Đăng Xuất",
+                "admin.tab_leads": "Khách Hàng Đăng Ký",
+                "admin.tab_products": "Quản Lý Cây Sản Phẩm",
+                "admin.tab_editor": "Cài Đặt Editor",
+                "admin.tab_pass": "Đổi Mật Khẩu Admin",
+                "btn.quote": "Yêu Cầu Báo Giá"
+            },
+            en: {
+                "nav.about": "About Us",
+                "nav.products": "Products & Services",
+                "nav.contact": "Contact Us",
+                "nav.admin": "Admin Panel",
+                "hero.badge": "Surface Finishing Solutions for Manufacturing Plants",
+                "hero.title1": "POLISHING, GRINDING &",
+                "hero.title2": "AUTOMATION TECH",
+                "hero.desc": "SEINTECH offers optimal solutions for production lines, enhancing processing efficiency, equipment lifespan, and standardizing industrial surface quality.",
+                "hero.btn1": "Free Consultation & Survey",
+                "hero.btn2": "Explore Products",
+                "about.tag": "About Us",
+                "about.title": "Accompanying Businesses on Every Path of Development",
+                "about.p1": "SEINTECH CO., LTD is a trusted technical partner specializing in industrial machinery technology, surface treatment systems, and comprehensive plant automation.",
+                "about.p2": "We assist manufacturing enterprises in optimizing costs and improving processing quality ranging from abrasives, sandblasting machines to modern AI-driven robot automation.",
+                "products.tag": "Our Supply Categories",
+                "products.title": "Core Products & Solutions",
+                "contact.tag": "Contact Info",
+                "contact.title": "Contact Us",
+                "contact.address": "Address:",
+                "contact.form_title": "Request Quote / Consultation",
+                "contact.send_btn": "Submit Request",
+                "admin.login_title": "Admin Login",
+                "admin.login_sub": "Please select account type and enter password",
+                "admin.role": "Account Role",
+                "admin.pass": "Password",
+                "admin.cancel": "Cancel",
+                "admin.login_btn": "Login",
+                "admin.dash_title": "SEINTECH Control Panel",
+                "admin.logged_as": "Logged in as:",
+                "admin.logout": "Logout",
+                "admin.tab_leads": "Customer Leads",
+                "admin.tab_products": "Product Management",
+                "admin.tab_editor": "Editor Settings",
+                "admin.tab_pass": "Change Admin Password",
+                "btn.quote": "Get Quote"
+            },
+            ko: {
+                "nav.about": "회사소개",
+                "nav.products": "제품 및 서비스",
+                "nav.contact": "문의하기",
+                "nav.admin": "관리자",
+                "hero.badge": "제조 공장을 위한 표면 처리 마무리 솔루션",
+                "hero.title1": "연마, 연삭 및",
+                "hero.title2": "자동화 기술",
+                "hero.desc": "SEINTECH는 생산 라인을 위한 최적의 솔루션을 제공하여 가공 효율성, 장비 수명을 향상시키고 산업용 표면 품질을 표준화합니다.",
+                "hero.btn1": "무료 상담 및 실사",
+                "hero.btn2": "제품 둘러보기",
+                "about.tag": "회사소개",
+                "about.title": "모든 성장 과정에서 기업과 함께합니다",
+                "about.p1": "SEINTECH (세인테크)는 산업용 기계 기술, 표면 처리 시스템 및 공장 종합 자동화 솔루션을 제공하는 신뢰할 수 있는 기술 파트너입니다.",
+                "about.p2": "연삭재, 샌드블라스트 머신부터 최첨단 AI 로봇 자동화까지, 제조 기업의 비용 절감 및 가공 품질 향상을 지원합니다.",
+                "products.tag": "공급 카테고리",
+                "products.title": "주요 제품 및 솔루션",
+                "contact.tag": "연락처 정보",
+                "contact.title": "문의하기",
+                "contact.address": "주소:",
+                "contact.form_title": "견적 요청 / 상담",
+                "contact.send_btn": "상담 요청 보내기",
+                "admin.login_title": "관리자 로그인",
+                "admin.login_sub": "계정 유형을 선택하고 비밀번호를 입력하세요",
+                "admin.role": "계정 유형",
+                "admin.pass": "비밀번호",
+                "admin.cancel": "취소",
+                "admin.login_btn": "로그인",
+                "admin.dash_title": "SEINTECH 관리 시스템",
+                "admin.logged_as": "현재 권한:",
+                "admin.logout": "로그아웃",
+                "admin.tab_leads": "고객 리드 목록",
+                "admin.tab_products": "제품 관리",
+                "admin.tab_editor": "에디터 설정",
+                "admin.tab_pass": "비밀번호 변경",
+                "btn.quote": "견적 요청"
+            },
+            zh: {
+                "nav.about": "关于我们",
+                "nav.products": "产品与服务",
+                "nav.contact": "联系我们",
+                "nav.admin": "管理后台",
+                "hero.badge": "面向制造工厂的表面处理完成解决方案",
+                "hero.title1": "抛光、研磨与",
+                "hero.title2": "自动化技术",
+                "hero.desc": "SEINTECH 为生产线提供最佳解决方案，提高加工效率、设备寿命，并标准化工业级表面质量。",
+                "hero.btn1": "免费咨询与现场勘测",
+                "hero.btn2": "探索产品",
+                "about.tag": "关于我们",
+                "about.title": "在企业发展的每一条道路上与您同行",
+                "about.p1": "SEINTECH 有限公司是值得信赖的技术合作伙伴，专注于提供工业机械技术、表面处理系统和工厂全面自动化解决方案。",
+                "about.p2": "我们帮助制造企业优化成本，提高从磨料磨具、喷砂机到现代 AI 机器人自动化应用的加工质量。",
+                "products.tag": "供应目录",
+                "products.title": "核心产品与解决方案",
+                "contact.tag": "联系信息",
+                "contact.title": "联系我们",
+                "contact.address": "地址:",
+                "contact.form_title": "索取报价 / 咨询",
+                "contact.send_btn": "提交咨询请求",
+                "admin.login_title": "管理员登录",
+                "admin.login_sub": "请选择账号类型并输入密码",
+                "admin.role": "账号类型",
+                "admin.pass": "密码",
+                "admin.cancel": "取消",
+                "admin.login_btn": "登录",
+                "admin.dash_title": "SEINTECH 管理后台",
+                "admin.logged_as": "当前登录身份:",
+                "admin.logout": "退出登录",
+                "admin.tab_leads": "客户咨询列表",
+                "admin.tab_products": "产品树状管理",
+                "admin.tab_editor": "编辑权限设置",
+                "admin.tab_pass": "修改管理员密码",
+                "btn.quote": "索取报价"
+            }
+        };
+
+        // HÀM GỌI API DỊCH TỰ ĐỘNG CỦA GOOGLE TRANSLATE (FREE CLIENT API)
+        async function translateText(text, targetLang) {
+            if (!text || targetLang === 'vi') return text;
+            try {
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`);
+                const data = await res.json();
+                return data[0][0][0] || text;
+            } catch (err) {
+                console.error("Lỗi dịch tự động:", err);
+                return text;
+            }
+        }
+
+        function toggleLangDropdown(event) {
+            event.stopPropagation();
+            document.getElementById('lang-dropdown').classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('lang-dropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        function changeLanguage(langCode, flagClass, langText) {
+            currentLang = langCode;
+            document.getElementById('current-flag').className = 'fi ' + flagClass + ' rounded-sm';
+            document.getElementById('current-lang-text').innerText = langText;
+            document.getElementById('lang-dropdown').classList.add('hidden');
+
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[langCode] && translations[langCode][key]) {
+                    element.innerText = translations[langCode][key];
+                }
+            });
+
+            renderTreeProducts();
+            renderAdminTree();
+        }
+
+        // 2. TÀI KHOẢN, MẬT KHẨU VÀ PHÂN QUYỀN
+        const defaultPasswords = {
+            superadmin: 'adminD_U_Y123',
+            editor: 'editor123'
+        };
+
+        let adminPasswords = JSON.parse(localStorage.getItem('seintech_passwords')) || defaultPasswords;
+        
+        let editorPermissions = JSON.parse(localStorage.getItem('seintech_editor_perms')) || {
+            canDeleteLead: false,
+            canAddCategory: false
+        };
+
+        let currentRole = null;
+
+        const defaultCategories = [
+            {
+                id: 1,
+                title: { vi: "Đai Mài Nhám & Vật Liệu Mài", en: "Abrasive Belts & Materials", ko: "연마 벨트 및 재료", zh: "砂带与磨料磨具" },
+                items: [
+                    { 
+                        id: 101, 
+                        title: { vi: "Đai Nhám Vòng Zirconia (ZA)", en: "Zirconia Abrasive Belt (ZA)", ko: "지르코니아 연마 벨트 (ZA)", zh: "锆刚玉砂带 (ZA)" }, 
+                        desc: { vi: "Hạt mài Zirconia tự mài sắc, tốc độ ăn kim loại cao, chuyên dùng cho thép & inox.", en: "Self-sharpening Zirconia grains, high metal removal rate, ideal for steel & stainless steel.", ko: "자체 연삭 지르코니아 입자, 높은 금속 제거율, 강철 및 스테인리스 스틸용.", zh: "自锐性锆刚玉磨粒，切削力强，专用于钢材与不锈钢。" }, 
+                        img: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=400&q=80" 
+                    },
+                    { 
+                        id: 102, 
+                        title: { vi: "Nhám Đai Ceramic Cao Cấp", en: "Premium Ceramic Abrasive Belt", ko: "프리미엄 세라믹 연마 벨트", zh: "高级陶瓷砂带" }, 
+                        desc: { vi: "Độ bền cực cao, chịu nhiệt tốt, giảm cháy bề mặt khi mài áp lực lớn.", en: "Extremely high durability, excellent heat resistance, reduces surface burn during heavy grinding.", ko: "매우 높은 내구성, 우수한 내열성, 고압 연삭 시 표면 타버림 감소.", zh: "超高耐用度，耐热性佳，高压研磨时有效防止工件烧伤。" }, 
+                        img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" 
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: { vi: "Hệ Thống Tự Động Hóa & Robot", en: "Automation & Robotics Systems", ko: "자동화 및 로봇 시스템", zh: "自动化与机器人系统" },
+                items: [
+                    { 
+                        id: 201, 
+                        title: { vi: "Robot Mài & Đánh Bóng Tự Động", en: "Automated Grinding & Polishing Robot", ko: "자동 연마 및 광택 로봇", zh: "自动研磨与抛光机器人" }, 
+                        desc: { vi: "Ứng dụng cánh tay Robot gia công chính xác bề mặt kim loại phức tạp.", en: "Robotic arm application for precise surface finishing of complex metal components.", ko: "복잡한 금속 부품의 정밀 표면 가공을 위한 로봇 암 적용.", zh: "应用机器人手臂，对复杂金属表面进行高精度加工。" }, 
+                        img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80" 
+                    }
+                ]
+            }
+        ];
+
+        let categories = JSON.parse(localStorage.getItem('seintech_categories')) || defaultCategories;
+        let leads = JSON.parse(localStorage.getItem('seintech_leads')) || [];
+
+        // RENDER KHÁCH HÀNG
+        function renderLeads() {
+            const tbody = document.getElementById('leadTableBody');
+            const badge = document.getElementById('lead-badge');
+            const mobileBadge = document.getElementById('mobile-lead-badge');
+            const tabBadge = document.getElementById('tab-lead-count');
+
+            badge.innerText = leads.length;
+            mobileBadge.innerText = leads.length;
+            tabBadge.innerText = leads.length;
+
+            if (leads.length > 0) {
+                badge.classList.remove('hidden');
+                mobileBadge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+                mobileBadge.classList.add('hidden');
+            }
+
+            tbody.innerHTML = '';
+            if (leads.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-400">Chưa có khách hàng nào đăng ký tư vấn.</td></tr>`;
+                return;
+            }
+
+            leads.forEach((l, i) => {
+                const canDelete = (currentRole === 'superadmin' || editorPermissions.canDeleteLead);
+                const deleteBtnHTML = canDelete 
+                    ? `<button onclick="deleteLead(${l.id})" class="text-red-500 hover:text-red-700 p-1.5 rounded text-xs"><i class="fa-solid fa-trash"></i></button>`
+                    : `<span class="text-slate-300 text-xs">Bị hạn chế</span>`;
+
+                tbody.innerHTML += `
+                    <tr class="border-b hover:bg-slate-50">
+                        <td class="p-3 font-semibold">${i + 1}</td>
+                        <td class="p-3 font-bold text-slate-900">${l.name}</td>
+                        <td class="p-3 font-semibold text-brand-green">
+                            <a href="tel:${l.phone}">${l.phone}</a>
+                        </td>
+                        <td class="p-3 text-xs font-medium">${l.product}</td>
+                        <td class="p-3 text-xs text-slate-500 max-w-xs">${l.note || '-'}</td>
+                        <td class="p-3 text-[11px] text-slate-400">${l.time}</td>
+                        <td class="p-3 text-center">${deleteBtnHTML}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // KHÁCH GỬI FORM TƯ VẤN
+        function handleCustomerSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const product = document.getElementById('custProduct').value;
+            const note = document.getElementById('custNote').value;
+
+            const newLead = {
+                id: Date.now(),
+                name,
+                phone,
+                product,
+                note,
+                time: new Date().toLocaleString('vi-VN')
+            };
+
+            leads.unshift(newLead);
+            localStorage.setItem('seintech_leads', JSON.stringify(leads));
+            
+            e.target.reset();
+            renderLeads();
+            alert('🎉 Cảm ơn bạn! SEINTECH đã nhận được thông tin và sẽ liên hệ lại trong thời gian sớm nhất.');
+        }
+
+        function deleteLead(id) {
+            const canDelete = (currentRole === 'superadmin' || editorPermissions.canDeleteLead);
+            if (!canDelete) return alert('Tài khoản của bạn không có quyền xóa khách hàng!');
+            if (confirm('Xóa thông tin khách hàng này?')) {
+                leads = leads.filter(l => l.id !== id);
+                localStorage.setItem('seintech_leads', JSON.stringify(leads));
+                renderLeads();
+            }
+        }
+
+        function clearAllLeads() {
+            if (currentRole !== 'superadmin') return alert('Chỉ Super Admin mới có quyền xóa toàn bộ danh sách!');
+            if (confirm('Xóa toàn bộ danh sách khách hàng?')) {
+                leads = [];
+                localStorage.setItem('seintech_leads', JSON.stringify(leads));
+                renderLeads();
+            }
+        }
+
+        // RENDER TRANG CHỦ (TỰ ĐỘNG THEO NGÔN NGỮ ĐANG CHỌN)
+        function renderTreeProducts() {
+            const container = document.getElementById('product-category-tree');
+            container.innerHTML = '';
+
+            const quoteText = translations[currentLang]["btn.quote"] || "Yêu Cầu Báo Giá";
+
+            categories.forEach(cat => {
+                let catTitle = (typeof cat.title === 'object') ? (cat.title[currentLang] || cat.title.vi) : cat.title;
+
+                let itemsHTML = '';
+                cat.items.forEach(item => {
+                    let itemTitle = (typeof item.title === 'object') ? (item.title[currentLang] || item.title.vi) : item.title;
+                    let itemDesc = (typeof item.desc === 'object') ? (item.desc[currentLang] || item.desc.vi) : item.desc;
+
+                    itemsHTML += `
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-100 flex flex-col">
+                            <div class="h-48 bg-slate-200 overflow-hidden">
+                                <img src="${item.img}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt="${itemTitle}">
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-lg mb-2">${itemTitle}</h4>
+                                    <p class="text-slate-600 text-xs leading-relaxed mb-4">${itemDesc}</p>
+                                </div>
+                                <a href="#contact" class="inline-block text-center bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 font-semibold py-2 rounded-lg text-xs transition-colors">
+                                    ${quoteText}
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML += `
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-6">
+                            <div class="w-3 h-8 bg-brand-green rounded-full"></div>
+                            <h3 class="text-2xl font-bold text-slate-900">${catTitle}</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            ${itemsHTML || '<p class="text-slate-400 text-xs">Chưa có sản phẩm nhỏ trong danh mục này.</p>'}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // RENDER CÂY SẢN PHẨM ADMIN
+        function renderAdminTree() {
+            const container = document.getElementById('adminCategoryTree');
+            const select = document.getElementById('subCatSelect');
+
+            container.innerHTML = '';
+            select.innerHTML = '';
+
+            categories.forEach(cat => {
+                let catTitle = (typeof cat.title === 'object') ? (cat.title[currentLang] || cat.title.vi) : cat.title;
+
+                select.innerHTML += `<option value="${cat.id}">${catTitle}</option>`;
+
+                let itemsRow = '';
+                cat.items.forEach(item => {
+                    let itemTitle = (typeof item.title === 'object') ? (item.title[currentLang] || item.title.vi) : item.title;
+                    let itemDesc = (typeof item.desc === 'object') ? (item.desc[currentLang] || item.desc.vi) : item.desc;
+
+                    itemsRow += `
+                        <div class="flex items-center justify-between p-3 bg-white rounded-lg border text-xs">
+                            <div class="flex items-center gap-3">
+                                <img src="${item.img}" class="w-10 h-10 object-cover rounded">
+                                <div>
+                                    <p class="font-bold text-slate-900">${item.title.vi} <span class="text-[10px] text-brand-green font-normal">(${itemTitle})</span></p>
+                                    <p class="text-slate-500 truncate max-w-xs">${itemDesc}</p>
+                                </div>
+                            </div>
+                            <button onclick="deleteSubProduct(${cat.id}, ${item.id})" class="text-red-500 hover:text-red-700 p-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+
+                const canDeleteCat = (currentRole === 'superadmin' || editorPermissions.canAddCategory);
+                const deleteCatBtn = canDeleteCat 
+                    ? `<button onclick="deleteCategory(${cat.id})" class="text-red-600 text-xs hover:underline">Xóa danh mục lớn</button>` 
+                    : '';
+
+                container.innerHTML += `
+                    <div class="bg-slate-50 p-4 rounded-xl border">
+                        <div class="flex justify-between items-center mb-3">
+                            <h5 class="font-bold text-slate-900 text-sm">${cat.title.vi} <span class="text-xs text-brand-green font-normal">(${catTitle})</span></h5>
+                            ${deleteCatBtn}
+                        </div>
+                        <div class="space-y-2">
+                            ${itemsRow || '<p class="text-slate-400 text-xs">Chưa có sản phẩm con.</p>'}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // TỰ ĐỘNG DỊCH KHI THÊM DANH MỤC LỚN MỚI
+        async function handleAddCategory(e) {
+            e.preventDefault();
+            const canAddCat = (currentRole === 'superadmin' || editorPermissions.canAddCategory);
+            if (!canAddCat) return alert('Tài khoản của bạn không được cấp quyền tạo danh mục lớn!');
+            
+            const viTitle = document.getElementById('catTitle').value.trim();
+            if(!viTitle) return;
+
+            const btn = document.getElementById('btnCreateCat');
+            btn.innerText = "Đang tự động dịch...";
+            btn.disabled = true;
+
+            // Dịch tự động song song sang EN, KO, ZH
+            const [enTitle, koTitle, zhTitle] = await Promise.all([
+                translateText(viTitle, 'en'),
+                translateText(viTitle, 'ko'),
+                translateText(viTitle, 'zh')
+            ]);
+
+            categories.push({ 
+                id: Date.now(), 
+                title: { vi: viTitle, en: enTitle, ko: koTitle, zh: zhTitle }, 
+                items: [] 
+            });
+
+            localStorage.setItem('seintech_categories', JSON.stringify(categories));
+            e.target.reset();
+            
+            btn.innerHTML = `<i class="fa-solid fa-plus"></i> Tạo Danh Mục`;
+            btn.disabled = false;
+
+            renderAdminTree();
+            renderTreeProducts();
+            alert('🎉 Đã tạo danh mục lớn và tự động dịch thành công sang 4 ngôn ngữ!');
+        }
+
+        // TỰ ĐỘNG DỊCH KHI THÊM SẢN PHẨM CON MỚI
+        async function handleAddSubProduct(e) {
+            e.preventDefault();
+            if (categories.length === 0) return alert('Chưa có danh mục lớn nào. Vui lòng tạo danh mục lớn trước!');
+
+            const catId = parseInt(document.getElementById('subCatSelect').value);
+            const viTitle = document.getElementById('subTitle').value.trim();
+            const viDesc = document.getElementById('subDesc').value.trim();
+            const urlImg = document.getElementById('subImgUrl').value;
+            const fileInput = document.getElementById('subImgFile');
+
+            let finalImg = urlImg || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80";
+
+            if (fileInput.files && fileInput.files[0]) {
+                finalImg = await convertFileToBase64(fileInput.files[0]);
+            }
+
+            const btn = document.getElementById('btnAddSub');
+            btn.innerText = "Đang dịch tự động...";
+            btn.disabled = true;
+
+            // Dịch tự động Tên & Mô tả sang 3 ngôn ngữ
+            const [enTitle, koTitle, zhTitle, enDesc, koDesc, zhDesc] = await Promise.all([
+                translateText(viTitle, 'en'),
+                translateText(viTitle, 'ko'),
+                translateText(viTitle, 'zh'),
+                translateText(viDesc, 'en'),
+                translateText(viDesc, 'ko'),
+                translateText(viDesc, 'zh')
+            ]);
+
+            const cat = categories.find(c => c.id === catId);
+            if (cat) {
+                cat.items.push({ 
+                    id: Date.now(), 
+                    title: { vi: viTitle, en: enTitle, ko: koTitle, zh: zhTitle }, 
+                    desc: { vi: viDesc, en: enDesc, ko: koDesc, zh: zhDesc }, 
+                    img: finalImg 
+                });
+
+                localStorage.setItem('seintech_categories', JSON.stringify(categories));
+                e.target.reset();
+
+                btn.innerHTML = `<i class="fa-solid fa-plus"></i> Thêm Sản Phẩm Con`;
+                btn.disabled = false;
+
+                renderAdminTree();
+                renderTreeProducts();
+                alert('🎉 Đã thêm sản phẩm con và tự động dịch thành công!');
+            }
+        }
+
+        function convertFileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        function deleteCategory(catId) {
+            const canDeleteCat = (currentRole === 'superadmin' || editorPermissions.canAddCategory);
+            if (!canDeleteCat) return alert('Tài khoản của bạn không được cấp quyền xóa danh mục lớn!');
+            if (confirm('Xóa toàn bộ danh mục lớn này?')) {
+                categories = categories.filter(c => c.id !== catId);
+                localStorage.setItem('seintech_categories', JSON.stringify(categories));
+                renderAdminTree();
+                renderTreeProducts();
+            }
+        }
+
+        function deleteSubProduct(catId, subId) {
+            if (confirm('Xóa sản phẩm con này?')) {
+                const cat = categories.find(c => c.id === catId);
+                if (cat) {
+                    cat.items = cat.items.filter(i => i.id !== subId);
+                    localStorage.setItem('seintech_categories', JSON.stringify(categories));
+                    renderAdminTree();
+                    renderTreeProducts();
+                }
+            }
+        }
+
+        // LƯU CÀI ĐẶT EDITOR (MẬT KHẨU VÀ PHÂN QUYỀN - CHỈ SUPER ADMIN)
+        function handleSaveEditorSettings(e) {
+            e.preventDefault();
+            if (currentRole !== 'superadmin') return alert('Chức năng chỉ dành cho Super Admin!');
+            
+            const newPass = document.getElementById('editEditorPass').value.trim();
+            if (newPass) {
+                adminPasswords.editor = newPass;
+                localStorage.setItem('seintech_passwords', JSON.stringify(adminPasswords));
+            }
+
+            editorPermissions.canDeleteLead = document.getElementById('permDeleteLead').checked;
+            editorPermissions.canAddCategory = document.getElementById('permAddCategory').checked;
+            localStorage.setItem('seintech_editor_perms', JSON.stringify(editorPermissions));
+
+            alert('🎉 Đã cập nhật thành công mật khẩu và phân quyền cho tài khoản Editor!');
+        }
+
+        // ĐỔI MẬT KHẨU CÁ NHÂN SUPER ADMIN
+        function handleChangeAdminPassword(e) {
+            e.preventDefault();
+            if (currentRole !== 'superadmin') return;
+            const oldPass = document.getElementById('oldAdminPass').value;
+            const newPass = document.getElementById('newAdminPass').value;
+            const confirmPass = document.getElementById('confirmAdminPass').value;
+            const errorDiv = document.getElementById('adminPassError');
+
+            if (oldPass !== adminPasswords.superadmin) {
+                errorDiv.innerText = "Mật khẩu hiện tại không đúng!";
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (newPass !== confirmPass) {
+                errorDiv.innerText = "Mật khẩu mới không trùng khớp!";
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            adminPasswords.superadmin = newPass;
+            localStorage.setItem('seintech_passwords', JSON.stringify(adminPasswords));
+            
+            errorDiv.classList.add('hidden');
+            e.target.reset();
+            alert('🎉 Thay đổi mật khẩu Super Admin thành công!');
+        }
+
+        // TABS ADMIN
+        function switchAdminTab(tab) {
+            document.getElementById('tabLeads').classList.add('hidden');
+            document.getElementById('tabProducts').classList.add('hidden');
+            document.getElementById('tabEditorMgmt').classList.add('hidden');
+            document.getElementById('tabAccount').classList.add('hidden');
+
+            document.getElementById('tabBtnLeads').className = "pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm flex items-center gap-2 shrink-0";
+            document.getElementById('tabBtnProducts').className = "pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm flex items-center gap-2 shrink-0";
+            document.getElementById('tabBtnEditorMgmt').className = "hidden pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm items-center gap-2 shrink-0";
+            document.getElementById('tabBtnAccount').className = "hidden pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm items-center gap-2 shrink-0";
+
+            if (currentRole === 'superadmin') {
+                document.getElementById('tabBtnEditorMgmt').classList.remove('hidden');
+                document.getElementById('tabBtnEditorMgmt').classList.add('flex');
+                document.getElementById('tabBtnAccount').classList.remove('hidden');
+                document.getElementById('tabBtnAccount').classList.add('flex');
+            }
+
+            if (tab === 'leads') {
+                document.getElementById('tabLeads').classList.remove('hidden');
+                document.getElementById('tabBtnLeads').className = "pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm flex items-center gap-2 shrink-0";
+            } else if (tab === 'products') {
+                document.getElementById('tabProducts').classList.remove('hidden');
+                document.getElementById('tabBtnProducts').className = "pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm flex items-center gap-2 shrink-0";
+            } else if (tab === 'editormgmt' && currentRole === 'superadmin') {
+                document.getElementById('tabEditorMgmt').classList.remove('hidden');
+                document.getElementById('tabBtnEditorMgmt').className = "flex pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm items-center gap-2 shrink-0";
+            } else if (tab === 'account' && currentRole === 'superadmin') {
+                document.getElementById('tabAccount').classList.remove('hidden');
+                document.getElementById('tabBtnAccount').className = "flex pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm items-center gap-2 shrink-0";
+            }
+        }
+
+        // LOGIN / LOGOUT ADMIN
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const role = document.getElementById('loginRole').value;
+            const pass = document.getElementById('adminPassword').value;
+
+            if (pass === adminPasswords[role]) {
+                currentRole = role;
+                document.getElementById('currentRoleBadge').innerText = (role === 'superadmin') ? 'Super Admin (Cao Cấp)' : 'Biên Tập Viên (Editor)';
+                document.getElementById('loginCard').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+
+                const canAddCat = (role === 'superadmin' || editorPermissions.canAddCategory);
+                if (canAddCat) {
+                    document.getElementById('addCatContainer').classList.remove('hidden');
+                } else {
+                    document.getElementById('addCatContainer').classList.add('hidden');
+                }
+
+                if (role === 'superadmin') {
+                    document.getElementById('tabBtnEditorMgmt').classList.remove('hidden');
+                    document.getElementById('tabBtnEditorMgmt').classList.add('flex');
+                    document.getElementById('tabBtnAccount').classList.remove('hidden');
+                    document.getElementById('tabBtnAccount').classList.add('flex');
+                    document.getElementById('clearLeadsBtn').classList.remove('hidden');
+
+                    document.getElementById('editEditorPass').value = adminPasswords.editor;
+                    document.getElementById('permDeleteLead').checked = editorPermissions.canDeleteLead;
+                    document.getElementById('permAddCategory').checked = editorPermissions.canAddCategory;
+                } else {
+                    document.getElementById('tabBtnEditorMgmt').classList.add('hidden');
+                    document.getElementById('tabBtnEditorMgmt').classList.remove('flex');
+                    document.getElementById('tabBtnAccount').classList.add('hidden');
+                    document.getElementById('tabBtnAccount').classList.remove('flex');
+                    document.getElementById('clearLeadsBtn').classList.add('hidden');
+                }
+
+                renderLeads();
+                renderAdminTree();
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        }
+
+        function handleLogout() {
+            currentRole = null;
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('loginCard').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+
+        // KHỞI CHẠY BAN ĐẦU
+        renderTreeProducts();
+        renderLeads();
+
+        // TOGGLE MOBILE MENU
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
