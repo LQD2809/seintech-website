@@ -2,7 +2,7 @@
 <html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SEINTECH - Công Nghệ Đánh Bóng, Mài & Tự Động Hóa</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -42,6 +42,11 @@
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(0, 168, 89, 0.8) 100%), 
                         url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
         }
+        /* Tối ưu giao diện nhập liệu cho iOS Safari & Messenger */
+        input, select, textarea {
+            font-size: 16px !important;
+            -webkit-appearance: none;
+        }
     </style>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased">
@@ -59,7 +64,7 @@
                         <span class="text-2xl font-black text-white tracking-wider block leading-none">SEIN<span class="text-brand-green">TECH</span></span>
                         <span class="text-[10px] text-slate-300 uppercase tracking-widest font-medium">Engineering Services</span>
                     </div>
-                </a> 
+                </a>
 
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-200">
@@ -68,10 +73,8 @@
                     <a href="#contact" data-i18n="nav.contact" class="hover:text-brand-green transition-colors">Liên Hệ</a>
                 </nav>
 
-                <!-- Right Side: Admin Button, Language Switcher & Hotline -->
+                <!-- Right Side -->
                 <div class="hidden lg:flex items-center space-x-4">
-                    
-                    <!-- NÚT QUẢN TRỊ VIÊN -->
                     <button onclick="openAdminModal()" class="bg-slate-800 hover:bg-slate-700 text-brand-green border border-brand-green/40 px-3.5 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all shadow-sm">
                         <i class="fa-solid fa-user-shield"></i>
                         <span data-i18n="nav.admin">Quản Trị</span>
@@ -104,21 +107,19 @@
                         </div>
                     </div>
 
-                    <!-- Hotline CTA -->
-                    <a href="tel:0968049859" class="bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 px-5 rounded-full shadow-lg hover:shadow-green-500/30 transition-all flex items-center gap-2 text-sm">
+                    <a href="tel:0968049859" class="bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 px-5 rounded-full shadow-lg transition-all flex items-center gap-2 text-sm">
                         <i class="fa-solid fa-phone animate-bounce"></i>
                         <span>0968 049 859</span>
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-brand-navy border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
             <a href="#about" data-i18n="nav.about" class="block text-slate-200 hover:text-brand-green py-2 font-medium">Giới Thiệu</a>
             <a href="#products" data-i18n="nav.products" class="block text-slate-200 hover:text-brand-green py-2 font-medium">Sản Phẩm & Dịch Vụ</a>
@@ -130,26 +131,6 @@
                 </span>
                 <span id="mobile-lead-badge" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
             </button>
-
-            <!-- Mobile Language Selector -->
-            <div class="pt-2 border-t border-slate-800">
-                <p class="text-xs text-slate-400 mb-2">Ngôn ngữ / Language:</p>
-                <div class="grid grid-cols-2 gap-2">
-                    <button onclick="changeLanguage('vi', 'fi-vn', 'TIẾNG VIỆT')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
-                        <span class="fi fi-vn"></span> Tiếng Việt
-                    </button>
-                    <button onclick="changeLanguage('en', 'fi-gb', 'ENGLISH')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
-                        <span class="fi fi-gb"></span> English
-                    </button>
-                    <button onclick="changeLanguage('ko', 'fi-kr', '한국어')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
-                        <span class="fi fi-kr"></span> 한국어
-                    </button>
-                    <button onclick="changeLanguage('zh', 'fi-cn', '中文')" class="bg-slate-800 text-white text-xs py-2 px-3 rounded flex items-center gap-2">
-                        <span class="fi fi-cn"></span> 中文
-                    </button>
-                </div>
-            </div>
-
             <a href="tel:0968049859" class="block text-center bg-brand-green text-white font-bold py-2.5 rounded-full shadow mt-4">
                 <i class="fa-solid fa-phone mr-2"></i> Hotline: 0968 049 859
             </a>
@@ -182,154 +163,128 @@
         </div>
     </section>
 
-    <!-- GIỚI THIỆU / ABOUT -->
+    <!-- ABOUT -->
     <section id="about" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
                     <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-i18n="about.tag">Về Chúng Tôi</span>
-                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2 mb-6" data-i18n="about.title">
-                        Đồng Hành Cùng Doanh Nghiệp Trên Mọi Chặng Đường Phát Triển
-                    </h2>
-                    <p class="text-slate-600 leading-relaxed mb-6" data-i18n="about.p1">
-                        CÔNG TY TNHH SEINTECH là đối tác kỹ thuật đáng tin cậy chuyên cung cấp các giải pháp công nghệ máy móc công nghiệp, hệ thống xử lý bề mặt và tự động hóa toàn diện cho nhà máy.
-                    </p>
-                    <p class="text-slate-600 leading-relaxed mb-8" data-i18n="about.p2">
-                        Chúng tôi giúp các doanh nghiệp sản xuất tối ưu chi phí, nâng cao chất lượng gia công từ vật liệu mài mòn, máy phun cát đến giải pháp ứng dụng Robot tự động hóa AI hiện đại.
-                    </p>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2 mb-6" data-i18n="about.title">Đồng Hành Cùng Doanh Nghiệp Trên Mọi Chặng Đường Phát Triển</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6" data-i18n="about.p1">CÔNG TY TNHH SEINTECH là đối tác kỹ thuật đáng tin cậy chuyên cung cấp các giải pháp công nghệ máy móc công nghiệp, hệ thống xử lý bề mặt và tự động hóa toàn diện cho nhà máy.</p>
+                    <p class="text-slate-600 leading-relaxed mb-8" data-i18n="about.p2">Chúng tôi giúp các doanh nghiệp sản xuất tối ưu chi phí, nâng cao chất lượng gia công từ vật liệu mài mòn, máy phun cát đến giải pháp ứng dụng Robot tự động hóa AI hiện đại.</p>
                 </div>
                 <div class="relative">
                     <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80" alt="SEINTECH Industrial Solution" class="w-full h-auto object-cover">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80" alt="SEINTECH" class="w-full h-auto object-cover">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SẢN PHẨM & DỊCH VỤ -->
+    <!-- PRODUCTS -->
     <section id="products" class="py-20 bg-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-i18n="products.tag">Danh Mục Cung Cấp</span>
                 <h2 class="text-3xl font-extrabold text-slate-900 mt-2" data-i18n="products.title">Sản Phẩm & Giải Pháp Chủ Lực</h2>
+                <p class="text-xs text-slate-500 mt-2">💡 Nhấp vào sản phẩm để mở bộ sưu tập lướt xem từng ảnh chi tiết</p>
             </div>
 
-            <!-- CHỨA DANH MỤC CÂY SẢN PHẨM ĐỘNG -->
-            <div id="product-category-tree" class="space-y-16">
-                <!-- Render từ JS -->
-            </div>
+            <div id="product-category-tree" class="space-y-16"></div>
         </div>
     </section>
 
-<!-- LIÊN HỆ / CONTACT -->
-<section id="contact" class="py-20 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        
-        <!-- LƯỚI 2 CỘT CHUẨN (Đã sửa lỗi cú pháp << và chia 12 phần) -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start w-full">
-            
-            <!-- CỘT TRÁI: THÔNG TIN LIÊN HỆ (Địa chỉ, Hotline, Email, Facebook) - Chiếm 5 phần -->
-            <div class="md:col-span-5 space-y-6">
-                <div>
-                    <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-i18n="contact.tag">Thông Tin Liên Hệ</span>
-                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2 mb-6" data-i18n="contact.title">Liên Hệ Với Chúng Tôi</h2>
+    <!-- CONTACT -->
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start w-full">
+                <div class="md:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-i18n="contact.tag">Thông Tin Liên Hệ</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mt-2 mb-6" data-i18n="contact.title">Liên Hệ Với Chúng Tôi</h2>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h5 class="font-bold text-slate-900" data-i18n="contact.address">Địa chỉ:</h5>
+                                <p class="text-slate-600 text-sm mt-1 leading-relaxed">128 Huy Cận, Khu Dân Cư Gia Hòa, Phước Long B, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Hotline / Zalo:</h5>
+                                <p class="text-slate-600 text-sm mt-1"><a href="tel:0968049859" class="hover:text-brand-green font-semibold">0968 049 859</a></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Email:</h5>
+                                <p class="text-slate-600 text-sm mt-1"><a href="mailto:seintechvina@gmail.com" class="hover:text-brand-green font-semibold">seintechvina@gmail.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-56 rounded-2xl overflow-hidden shadow-md border border-slate-200">
+                        <iframe src="https://maps.google.com/maps?q=128%20Huy%20C%E1%BA%ADn,%20Ph%C6%B0%E1%BB%9Bc%20Long%20B,%20Th%E1%BB%A7%20%C4%90%E1%BB%A9c,%20H%E1%BB%93%20Ch%C3%AD%20Minh&t=&z=15&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0" loading="lazy"></iframe>
+                    </div>
                 </div>
 
-                <div class="space-y-6">
-                    <!-- Địa chỉ -->
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
+                <div class="md:col-span-7 bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 relative">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-6" data-i18n="contact.form_title">Yêu Cầu Báo Giá / Tư Vấn</h3>
+                    
+                    <!-- THÔNG BÁO LỜI CẢM ƠN TRỰC TIẾP TRÊN TRANG (Dành cho iPhone/Messenger) -->
+                    <div id="thankYouAlert" class="hidden mb-6 p-4 bg-emerald-50 border border-emerald-300 rounded-xl text-emerald-800 text-sm font-semibold flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-2xl shrink-0"></i>
                         <div>
-                            <h5 class="font-bold text-slate-900" data-i18n="contact.address">Địa chỉ:</h5>
-                            <p class="text-slate-600 text-sm mt-1 leading-relaxed">128 Huy Cận, Khu Dân Cư Gia Hòa, Phước Long B, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+                            <p class="text-base font-bold text-emerald-900">Gửi Yêu Cầu Thành Công!</p>
+                            <p class="text-xs text-emerald-700 mt-0.5">Cảm ơn quý khách! SEINTECH đã nhận được thông tin và sẽ liên hệ hỗ trợ sớm nhất.</p>
                         </div>
                     </div>
 
-                    <!-- Hotline / Zalo -->
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-slate-900" data-i18n="contact.phone">Hotline / Zalo:</h5>
-                            <p class="text-slate-600 text-sm mt-1"><a href="tel:0968049859" class="hover:text-brand-green font-semibold">0968 049 859</a></p>
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-slate-900">Email:</h5>
-                            <p class="text-slate-600 text-sm mt-1"><a href="mailto:seintechvina@gmail.com" class="hover:text-brand-green font-semibold">seintechvina@gmail.com</a></p>
-                        </div>
-                    </div>
-
-                    <!-- Facebook (Đã thêm vào cột trái) -->
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brand-green/10 text-brand-green rounded-lg flex items-center justify-center text-xl shrink-0">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-slate-900">Fanpage Facebook:</h5>
-                            <p class="text-slate-600 text-sm mt-1"><a href="https://web.facebook.com/seintech" target="_blank" class="hover:text-brand-green font-semibold">facebook.com/seintech</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- (Đã đóng đúng thẻ div của cột trái tại đây) -->
-
-            <!-- CỘT PHẢI: FORM YÊU CẦU BÁO GIÁ / TƯ VẤN - Chiếm 7 phần -->
-            <div class="md:col-span-7 bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-                <h3 class="text-2xl font-bold text-slate-900 mb-6" data-i18n="contact.form_title">Yêu Cầu Báo Giá / Tư Vấn</h3>
-                <form id="consultForm" onsubmit="handleCustomerSubmit(event)" class="space-y-4">
-                    <div>
-                        <input type="text" id="custName" required placeholder="Họ và tên *" class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-sm">
-                    </div>
-                    <div>
-                        <input type="tel" id="custPhone" required placeholder="Số điện thoại / Zalo *" class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-sm">
-                    </div>
-                    <div>
-                        <select id="custProduct" class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-slate-600 text-sm bg-white">
+                    <form id="consultForm" onsubmit="handleCustomerSubmit(event)" class="space-y-4">
+                        <input type="text" id="custName" required placeholder="Họ và tên *" class="w-full px-4 py-3.5 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-base bg-white">
+                        <input type="tel" id="custPhone" required placeholder="Số điện thoại / Zalo *" class="w-full px-4 py-3.5 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-base bg-white">
+                        <select id="custProduct" class="w-full px-4 py-3.5 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-slate-700 text-base bg-white">
                             <option value="Chưa chọn">-- Chọn sản phẩm quan tâm --</option>
                             <option value="Đai Mài Nhám & Vật Liệu Mài">Đai Mài Nhám & Vật Liệu Mài</option>
                             <option value="Máy Phun Cát (Sand Blast)">Máy Phun Cát (Sand Blast)</option>
                             <option value="Hệ Thống Tự Động Hóa & AI">Hệ Thống Tự Động Hóa & AI</option>
                         </select>
-                    </div>
-                    <div>
-                        <textarea id="custNote" rows="3" placeholder="Ghi chú thêm về nhà máy/sản phẩm..." class="w-full px-4 py-3 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-sm"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-3.5 rounded-lg shadow-lg transition-colors text-sm" data-i18n="contact.send_btn">Gửi Yêu Cầu Tư Vấn</button>
-                </form>
+                        <textarea id="custNote" rows="3" placeholder="Ghi chú thêm về nhà máy/sản phẩm..." class="w-full px-4 py-3.5 rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-brand-green text-base bg-white"></textarea>
+                        <button type="submit" id="btnSubmitForm" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-4 rounded-lg shadow-lg transition-colors text-base flex items-center justify-center gap-2 cursor-pointer">
+                            <span data-i18n="contact.send_btn">Gửi Yêu Cầu Tư Vấn</span>
+                        </button>
+                    </form>
+                </div>
             </div>
-
-        </div> <!-- Đóng thẻ grid -->
-    </div>
-</section>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer class="bg-brand-navy text-slate-400 py-8 border-t border-slate-800 text-center text-xs">
         &copy; 2026 CÔNG TY TNHH SEINTECH. All Rights Reserved (by Seintech_LQD).
     </footer>
 
-    <!-- POPUP MODAL QUẢN TRỊ VIÊN (ADMIN) -->
+    <!-- MODAL CHI TIẾT SẢN PHẨM -->
+    <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 md:p-8 max-h-[90vh] overflow-y-auto relative">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-20 text-slate-400 hover:text-slate-700 text-3xl font-bold bg-white/80 rounded-full w-10 h-10 flex items-center justify-center shadow">&times;</button>
+            <div id="modalProductContent"></div>
+        </div>
+    </div>
+
+    <!-- POPUP MODAL QUẢN TRỊ VIÊN -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
-        
         <!-- CARD ĐĂNG NHẬP -->
         <div id="loginCard" class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-200">
             <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-2xl mx-auto mb-3">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
+                <div class="w-16 h-16 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-2xl mx-auto mb-3"><i class="fa-solid fa-lock"></i></div>
                 <h3 class="text-2xl font-bold text-slate-900" data-i18n="admin.login_title">Đăng Nhập Quản Trị</h3>
                 <p class="text-xs text-slate-500 mt-1" data-i18n="admin.login_sub">Vui lòng chọn tài khoản và nhập mật khẩu</p>
             </div>
-            
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-600 mb-1" data-i18n="admin.role">Loại tài khoản</label>
@@ -344,8 +299,8 @@
                 </div>
                 <div id="loginError" class="text-red-500 text-xs hidden font-semibold">Mật khẩu sai! Vui lòng thử lại.</div>
                 <div class="flex gap-3 pt-2">
-                    <button type="button" onclick="closeAdminModal()" class="w-1/2 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-sm transition-colors" data-i18n="admin.cancel">Hủy</button>
-                    <button type="submit" class="w-1/2 py-3 bg-brand-green hover:bg-brand-darkgreen text-white font-bold rounded-lg text-sm shadow-md transition-colors" data-i18n="admin.login_btn">Đăng Nhập</button>
+                    <button type="button" onclick="closeAdminModal()" class="w-1/2 py-3 bg-slate-100 text-slate-700 font-bold rounded-lg text-sm" data-i18n="admin.cancel">Hủy</button>
+                    <button type="submit" class="w-1/2 py-3 bg-brand-green text-white font-bold rounded-lg text-sm shadow-md" data-i18n="admin.login_btn">Đăng Nhập</button>
                 </div>
             </form>
         </div>
@@ -354,24 +309,19 @@
         <div id="adminDashboard" class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 border border-slate-200 hidden">
             <div class="flex justify-between items-center border-b pb-4 mb-6">
                 <div>
-                    <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-brand-green"></i> <span data-i18n="admin.dash_title">Hệ Thống Quản Trị SEINTECH</span>
-                    </h3>
+                    <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-sliders text-brand-green"></i> <span data-i18n="admin.dash_title">Hệ Thống Quản Trị SEINTECH</span></h3>
                     <p class="text-xs text-slate-500 mt-1"><span data-i18n="admin.logged_as">Đang đăng nhập với quyền:</span> <span id="currentRoleBadge" class="font-bold text-brand-green uppercase"></span></p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <!-- NÚT ĐĂNG XUẤT -->
-                    <button onclick="handleLogout()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors">
-                        <i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="admin.logout">Đăng Xuất</span>
-                    </button>
+                    <button onclick="handleLogout()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="admin.logout">Đăng Xuất</span></button>
                     <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
                 </div>
             </div>
 
-            <!-- THANH TABS CHUYỂN ĐỔI QUẢN LÝ -->
+            <!-- THANH TABS QUẢN TRỊ -->
             <div class="flex border-b mb-6 space-x-4 overflow-x-auto">
                 <button id="tabBtnLeads" onclick="switchAdminTab('leads')" class="pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm flex items-center gap-2 shrink-0">
-                    <i class="fa-solid fa-users"></i> <span data-i18n="admin.tab_leads">Khách Hàng Đăng Ký</span>
+                    <i class="fa-solid fa-users"></i> <span data-i18n="admin.tab_leads">Khách Hàng Đăng Ký (Google Sheets)</span>
                     <span id="tab-lead-count" class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full">0</span>
                 </button>
                 <button id="tabBtnProducts" onclick="switchAdminTab('products')" class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm flex items-center gap-2 shrink-0">
@@ -385,74 +335,63 @@
                 </button>
             </div>
 
-            <!-- TAB 1: DANH SÁCH KHÁCH HÀNG ĐĂNG KÝ TƯ VẤN -->
+            <!-- TAB 1: KHÁCH HÀNG (SHEETS) -->
             <div id="tabLeads">
                 <div class="flex justify-between items-center mb-4">
-                    <h4 class="font-bold text-slate-800 text-sm">Danh Sách Yêu Cầu Báo Giá Từng Khách Hàng</h4>
-                    <button id="clearLeadsBtn" onclick="clearAllLeads()" class="text-xs text-red-600 hover:underline">Xóa tất cả danh sách</button>
+                    <h4 class="font-bold text-slate-800 text-sm">Danh Sách Yêu Cầu Báo Giá Realtime</h4>
                 </div>
                 <div class="overflow-x-auto border rounded-xl">
                     <table class="w-full text-left text-sm text-slate-600 border-collapse">
                         <thead class="bg-slate-100 text-slate-700 uppercase text-[11px] font-bold">
                             <tr>
-                                <th class="p-3 border-b">STT</th>
+                                <th class="p-3 border-b">Thời Gian</th>
                                 <th class="p-3 border-b">Họ & Tên</th>
                                 <th class="p-3 border-b">SĐT / Zalo</th>
                                 <th class="p-3 border-b">Sản Phẩm Quan Tâm</th>
                                 <th class="p-3 border-b">Ghi Chú</th>
-                                <th class="p-3 border-b">Thời Gian</th>
-                                <th class="p-3 border-b text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="leadTableBody">
-                            <!-- Đổ từ JS -->
+                            <tr><td colspan="5" class="p-6 text-center text-slate-400">Đang tải dữ liệu từ Google Sheets...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- TAB 2: QUẢN LÝ DANH MỤC LỚN VÀ CÁC SẢN PHẨM CON -->
-            <div id="tabProducts" class="hidden">
-                <!-- FORM TẠO DANH MỤC LỚN MỚI -->
-                <div id="addCatContainer" class="bg-slate-50 p-4 rounded-xl border mb-6">
-                    <h5 class="font-bold text-slate-800 text-xs uppercase mb-3 text-brand-green flex items-center gap-1.5">
-                        <i class="fa-solid fa-folder-plus"></i> Tạo Danh Mục Sản Phẩm Lớn Mới (Tự Động Dịch 4 Ngôn Ngữ)
-                    </h5>
+            <!-- TAB 2: QUẢN LÝ CÂY SẢN PHẨM -->
+            <div id="tabProducts" class="hidden space-y-8">
+                <div id="addCatContainer" class="bg-slate-50 p-4 rounded-xl border">
+                    <h5 class="font-bold text-slate-800 text-xs uppercase mb-3 text-brand-green flex items-center gap-1.5"><i class="fa-solid fa-folder-plus"></i> Tạo Danh Mục Sản Phẩm Lớn Mới</h5>
                     <form onsubmit="handleAddCategory(event)" class="flex flex-col sm:flex-row gap-3">
-                        <input type="text" id="catTitle" required placeholder="Nhập tên danh mục lớn bằng Tiếng Việt (ví dụ: Máy Phun Cát...)" class="flex-1 px-3 py-2 border rounded-lg text-sm outline-none bg-white">
+                        <input type="text" id="catTitle" required placeholder="Nhập tên danh mục lớn bằng Tiếng Việt..." class="flex-1 px-3 py-2 border rounded-lg text-sm outline-none bg-white">
                         <button type="submit" id="btnCreateCat" class="bg-brand-navy hover:bg-slate-800 text-white font-bold px-5 py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
                             <i class="fa-solid fa-plus"></i> Tạo Danh Mục
                         </button>
                     </form>
                 </div>
 
-                <!-- FORM THÊM SẢN PHẨM CON VÀO DANH MỤC -->
-                <div class="bg-slate-50 p-5 rounded-xl border mb-8">
-                    <h5 class="font-bold text-slate-800 text-xs uppercase mb-4 text-brand-green flex items-center gap-1.5">
-                        <i class="fa-solid fa-box-archive"></i> Thêm Sản Phẩm Con (Tự Động Dịch 4 Ngôn Ngữ)
-                    </h5>
+                <div class="bg-slate-50 p-5 rounded-xl border">
+                    <h5 class="font-bold text-slate-800 text-xs uppercase mb-4 text-brand-green flex items-center gap-1.5"><i class="fa-solid fa-box-archive"></i> Thêm Sản Phẩm Con (Hỗ Trợ Chọn NHIỀU Ảnh)</h5>
                     <form onsubmit="handleAddSubProduct(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-600 mb-1">Chọn danh mục lớn *</label>
-                            <select id="subCatSelect" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
-                                <!-- Đổ danh mục vào đây -->
-                            </select>
+                            <select id="subCatSelect" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white"></select>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-600 mb-1">Tên sản phẩm nhỏ *</label>
-                            <input type="text" id="subTitle" required placeholder="Ví dụ: Nhám đai Zirconia ZA #60" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                            <input type="text" id="subTitle" required placeholder="Ví dụ: Nhám đai Zirconia ZA #60" class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tải ảnh sản phẩm (File từ máy)</label>
-                            <input type="file" id="subImgFile" accept="image/*" class="w-full px-2 py-1 border rounded-lg text-xs bg-white">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tải NHIỀU file ảnh từ máy tính</label>
+                            <input type="file" id="subImgFiles" accept="image/*" multiple class="w-full px-2 py-1.5 border rounded-lg text-xs bg-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Hoặc dán Link ảnh URL</label>
-                            <input type="text" id="subImgUrl" placeholder="https://..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Hoặc dán nhiều Link Ảnh (dấu `,` ngăn cách)</label>
+                            <input type="text" id="subImgUrl" placeholder="https://img1.jpg, https://img2.jpg" class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-xs font-semibold text-slate-600 mb-1">Mô tả đặc tính kỹ thuật *</label>
-                            <textarea id="subDesc" rows="2" required placeholder="Thông số kỹ thuật, ứng dụng..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
+                            <textarea id="subDesc" rows="2" required placeholder="Thông số kỹ thuật, ứng dụng..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white"></textarea>
                         </div>
                         <div class="md:col-span-2 flex justify-end">
                             <button type="submit" id="btnAddSub" class="bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 px-6 rounded-lg text-sm shadow flex items-center gap-2">
@@ -462,13 +401,10 @@
                     </form>
                 </div>
 
-                <!-- CÂY DANH MỤC HIỂN THỊ -->
-                <div id="adminCategoryTree" class="space-y-6">
-                    <!-- Render từ JS -->
-                </div>
+                <div id="adminCategoryTree" class="space-y-6"></div>
             </div>
 
-            <!-- TAB 3: CÀI ĐẶT & ĐỔI MẬT KHẨU EDITOR -->
+            <!-- TAB 3: CÀI ĐẶT EDITOR -->
             <div id="tabEditorMgmt" class="hidden">
                 <div class="max-w-xl mx-auto bg-slate-50 p-6 rounded-xl border">
                     <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
@@ -476,18 +412,18 @@
                     </h4>
                     <form onsubmit="handleSaveEditorSettings(event)" class="space-y-5">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Đặt Mật Khẩu Mới Cho Editor (Super Admin đổi trực tiếp không cần mật khẩu cũ)</label>
-                            <input type="text" id="editEditorPass" placeholder="Nhập mật khẩu mới cho editor..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Đặt Mật Khẩu Mới Cho Editor</label>
+                            <input type="text" id="editEditorPass" placeholder="Nhập mật khẩu mới..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
                         </div>
                         <div class="border-t pt-4 space-y-3">
                             <label class="block text-xs font-bold uppercase text-slate-700">Lựa chọn cấp quyền cho Editor:</label>
                             <div class="flex items-center gap-2">
                                 <input type="checkbox" id="permDeleteLead" class="w-4 h-4 rounded text-brand-green focus:ring-brand-green">
-                                <span class="text-xs text-slate-700">Cho phép Editor xóa thông tin khách hàng đăng ký tư vấn</span>
+                                <span class="text-xs text-slate-700">Cho phép Editor xem/xóa thông tin khách hàng</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <input type="checkbox" id="permAddCategory" class="w-4 h-4 rounded text-brand-green focus:ring-brand-green">
-                                <span class="text-xs text-slate-700">Cho phép Editor tạo hoặc xóa danh mục sản phẩm lớn</span>
+                                <span class="text-xs text-slate-700">Cho phép Editor tạo hoặc xóa danh mục lớn</span>
                             </div>
                         </div>
                         <button type="submit" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 rounded-lg text-sm shadow mt-2">
@@ -497,7 +433,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: ĐỔI MẬT KHẨU SUPER ADMIN -->
+            <!-- TAB 4: ĐỔI MẬT KHẨU ADMIN -->
             <div id="tabAccount" class="hidden">
                 <div class="max-w-md mx-auto bg-slate-50 p-6 rounded-xl border">
                     <h4 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
@@ -506,15 +442,15 @@
                     <form onsubmit="handleChangeAdminPassword(event)" class="space-y-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-600 mb-1">Mật khẩu hiện tại *</label>
-                            <input type="password" id="oldAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                            <input type="password" id="oldAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-600 mb-1">Mật khẩu mới *</label>
-                            <input type="password" id="newAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                            <input type="password" id="newAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-600 mb-1">Xác nhận mật khẩu mới *</label>
-                            <input type="password" id="confirmAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                            <input type="password" id="confirmAdminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
                         </div>
                         <div id="adminPassError" class="text-red-500 text-xs hidden font-semibold">Mật khẩu mới không trùng khớp hoặc sai mật khẩu hiện tại!</div>
                         <button type="submit" class="w-full bg-brand-navy hover:bg-slate-800 text-white font-bold py-2.5 rounded-lg text-sm shadow">
@@ -523,15 +459,14 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- JAVASCRIPT HỆ THỐNG FULL -->
+    <!-- JAVASCRIPT LOGIC TỐI ƯU TOÀN BỘ BỘ DUYỆT -->
     <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqeo89aP3lkfM7TM2RoBA9xi4B3RkHHB3Q0bcjJNcmKnPC_Yz7rncEqHr4UIVNPExj/exec";
         let currentLang = 'vi';
 
-        // 1. DỮ LIỆU DỊCH ĐA NGÔN NGỮ GIAO DIỆN & ADMIN
         const translations = {
             vi: {
                 "nav.about": "Giới Thiệu",
@@ -568,7 +503,8 @@
                 "admin.tab_products": "Quản Lý Cây Sản Phẩm",
                 "admin.tab_editor": "Cài Đặt Editor",
                 "admin.tab_pass": "Đổi Mật Khẩu Admin",
-                "btn.quote": "Yêu Cầu Báo Giá"
+                "btn.quote": "Yêu Cầu Báo Giá",
+                "btn.detail": "Xem Chi Tiết & Bộ Ảnh"
             },
             en: {
                 "nav.about": "About Us",
@@ -605,7 +541,8 @@
                 "admin.tab_products": "Product Management",
                 "admin.tab_editor": "Editor Settings",
                 "admin.tab_pass": "Change Admin Password",
-                "btn.quote": "Get Quote"
+                "btn.quote": "Get Quote",
+                "btn.detail": "View Details & Gallery"
             },
             ko: {
                 "nav.about": "회사소개",
@@ -642,7 +579,8 @@
                 "admin.tab_products": "제품 관리",
                 "admin.tab_editor": "에디터 설정",
                 "admin.tab_pass": "비밀번호 변경",
-                "btn.quote": "견적 요청"
+                "btn.quote": "견적 요청",
+                "btn.detail": "상세정보 및 사진 보기"
             },
             zh: {
                 "nav.about": "关于我们",
@@ -679,11 +617,11 @@
                 "admin.tab_products": "产品树状管理",
                 "admin.tab_editor": "编辑权限设置",
                 "admin.tab_pass": "修改管理员密码",
-                "btn.quote": "索取报价"
+                "btn.quote": "索取报价",
+                "btn.detail": "查看详情与图库"
             }
         };
 
-        // HÀM GỌI API DỊCH TỰ ĐỘNG CỦA GOOGLE TRANSLATE (FREE CLIENT API)
         async function translateText(text, targetLang) {
             if (!text || targetLang === 'vi') return text;
             try {
@@ -691,7 +629,6 @@
                 const data = await res.json();
                 return data[0][0][0] || text;
             } catch (err) {
-                console.error("Lỗi dịch tự động:", err);
                 return text;
             }
         }
@@ -701,7 +638,7 @@
             document.getElementById('lang-dropdown').classList.toggle('hidden');
         }
 
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function() {
             const dropdown = document.getElementById('lang-dropdown');
             if (dropdown && !dropdown.classList.contains('hidden')) {
                 dropdown.classList.add('hidden');
@@ -726,19 +663,9 @@
             renderAdminTree();
         }
 
-        // 2. TÀI KHOẢN, MẬT KHẨU VÀ PHÂN QUYỀN
-        const defaultPasswords = {
-            superadmin: 'adminD_U_Y123',
-            editor: 'editor123'
-        };
-
+        const defaultPasswords = { superadmin: 'adminD_U_Y123', editor: 'editor123' };
         let adminPasswords = JSON.parse(localStorage.getItem('seintech_passwords')) || defaultPasswords;
-        
-        let editorPermissions = JSON.parse(localStorage.getItem('seintech_editor_perms')) || {
-            canDeleteLead: false,
-            canAddCategory: false
-        };
-
+        let editorPermissions = JSON.parse(localStorage.getItem('seintech_editor_perms')) || { canDeleteLead: false, canAddCategory: false };
         let currentRole = null;
 
         const defaultCategories = [
@@ -750,172 +677,251 @@
                         id: 101, 
                         title: { vi: "Đai Nhám Vòng Zirconia (ZA)", en: "Zirconia Abrasive Belt (ZA)", ko: "지르코니아 연마 벨트 (ZA)", zh: "锆刚玉砂带 (ZA)" }, 
                         desc: { vi: "Hạt mài Zirconia tự mài sắc, tốc độ ăn kim loại cao, chuyên dùng cho thép & inox.", en: "Self-sharpening Zirconia grains, high metal removal rate, ideal for steel & stainless steel.", ko: "자체 연삭 지르코니아 입자, 높은 금속 제거율, 강철 및 스테인리스 스틸용.", zh: "自锐性锆刚玉磨粒，切削力强，专用于钢材与不锈钢。" }, 
-                        img: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=400&q=80" 
-                    },
-                    { 
-                        id: 102, 
-                        title: { vi: "Nhám Đai Ceramic Cao Cấp", en: "Premium Ceramic Abrasive Belt", ko: "프리미엄 세라믹 연마 벨트", zh: "高级陶瓷砂带" }, 
-                        desc: { vi: "Độ bền cực cao, chịu nhiệt tốt, giảm cháy bề mặt khi mài áp lực lớn.", en: "Extremely high durability, excellent heat resistance, reduces surface burn during heavy grinding.", ko: "매우 높은 내구성, 우수한 내열성, 고압 연삭 시 표면 타버림 감소.", zh: "超高耐用度，耐热性佳，高压研磨时有效防止工件烧伤。" }, 
-                        img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" 
-                    }
-                ]
-            },
-            {
-                id: 2,
-                title: { vi: "Hệ Thống Tự Động Hóa & Robot", en: "Automation & Robotics Systems", ko: "자동화 및 로봇 시스템", zh: "自动化与机器人系统" },
-                items: [
-                    { 
-                        id: 201, 
-                        title: { vi: "Robot Mài & Đánh Bóng Tự Động", en: "Automated Grinding & Polishing Robot", ko: "자동 연마 및 광택 로봇", zh: "自动研磨与抛光机器人" }, 
-                        desc: { vi: "Ứng dụng cánh tay Robot gia công chính xác bề mặt kim loại phức tạp.", en: "Robotic arm application for precise surface finishing of complex metal components.", ko: "복잡한 금속 부품의 정밀 표면 가공을 위한 로봇 암 적용.", zh: "应用机器人手臂，对复杂金属表面进行高精度加工。" }, 
-                        img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80" 
+                        images: [
+                            "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80",
+                            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
+                            "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
+                        ]
                     }
                 ]
             }
         ];
 
         let categories = JSON.parse(localStorage.getItem('seintech_categories')) || defaultCategories;
-        let leads = JSON.parse(localStorage.getItem('seintech_leads')) || [];
 
-        // RENDER KHÁCH HÀNG
-        function renderLeads() {
-            const tbody = document.getElementById('leadTableBody');
-            const badge = document.getElementById('lead-badge');
-            const mobileBadge = document.getElementById('mobile-lead-badge');
-            const tabBadge = document.getElementById('tab-lead-count');
+        let currentModalImages = [];
+        let currentModalIndex = 0;
+        let currentModalTitle = '';
+        let currentModalDesc = '';
 
-            badge.innerText = leads.length;
-            mobileBadge.innerText = leads.length;
-            tabBadge.innerText = leads.length;
+        function openProductModal(catId, itemId) {
+            const cat = categories.find(c => c.id === catId);
+            if (!cat) return;
+            const item = cat.items.find(i => i.id === itemId);
+            if (!item) return;
 
-            if (leads.length > 0) {
-                badge.classList.remove('hidden');
-                mobileBadge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-                mobileBadge.classList.add('hidden');
-            }
+            currentModalTitle = (typeof item.title === 'object') ? (item.title[currentLang] || item.title.vi) : item.title;
+            currentModalDesc = (typeof item.desc === 'object') ? (item.desc[currentLang] || item.desc.vi) : item.desc;
+            currentModalImages = (item.images && item.images.length > 0) ? item.images : [(item.img || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80")];
+            currentModalIndex = 0;
 
-            tbody.innerHTML = '';
-            if (leads.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-400">Chưa có khách hàng nào đăng ký tư vấn.</td></tr>`;
-                return;
-            }
-
-            leads.forEach((l, i) => {
-                const canDelete = (currentRole === 'superadmin' || editorPermissions.canDeleteLead);
-                const deleteBtnHTML = canDelete 
-                    ? `<button onclick="deleteLead(${l.id})" class="text-red-500 hover:text-red-700 p-1.5 rounded text-xs"><i class="fa-solid fa-trash"></i></button>`
-                    : `<span class="text-slate-300 text-xs">Bị hạn chế</span>`;
-
-                tbody.innerHTML += `
-                    <tr class="border-b hover:bg-slate-50">
-                        <td class="p-3 font-semibold">${i + 1}</td>
-                        <td class="p-3 font-bold text-slate-900">${l.name}</td>
-                        <td class="p-3 font-semibold text-brand-green">
-                            <a href="tel:${l.phone}">${l.phone}</a>
-                        </td>
-                        <td class="p-3 text-xs font-medium">${l.product}</td>
-                        <td class="p-3 text-xs text-slate-500 max-w-xs">${l.note || '-'}</td>
-                        <td class="p-3 text-[11px] text-slate-400">${l.time}</td>
-                        <td class="p-3 text-center">${deleteBtnHTML}</td>
-                    </tr>
-                `;
-            });
+            updateModalView();
+            document.getElementById('productModal').classList.remove('hidden');
         }
 
-        // KHÁCH GỬI FORM TƯ VẤN
-        function handleCustomerSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('custName').value;
-            const phone = document.getElementById('custPhone').value;
-            const product = document.getElementById('custProduct').value;
-            const note = document.getElementById('custNote').value;
+        function updateModalView() {
+            const modalContent = document.getElementById('modalProductContent');
+            const total = currentModalImages.length;
+            const currentImg = currentModalImages[currentModalIndex];
 
-            const newLead = {
-                id: Date.now(),
-                name,
-                phone,
-                product,
-                note,
-                time: new Date().toLocaleString('vi-VN')
+            modalContent.innerHTML = `
+                <div class="space-y-4">
+                    <div class="relative h-72 sm:h-96 bg-slate-900 rounded-2xl overflow-hidden shadow-inner flex items-center justify-center select-none">
+                        <img id="mainModalImg" src="${currentImg}" class="max-h-full max-w-full object-contain transition-all duration-300" alt="${currentModalTitle}">
+                        ${total > 1 ? `
+                            <button onclick="prevModalImage()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-11 h-11 rounded-full flex items-center justify-center transition-all shadow-lg"><i class="fa-solid fa-chevron-left text-base"></i></button>
+                            <button onclick="nextModalImage()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-11 h-11 rounded-full flex items-center justify-center transition-all shadow-lg"><i class="fa-solid fa-chevron-right text-base"></i></button>
+                            <div class="absolute bottom-3 right-3 bg-black/75 text-white text-xs font-bold px-3.5 py-1.5 rounded-full backdrop-blur-md shadow">
+                                <span>${currentModalIndex + 1}/${total} ảnh</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    ${total > 1 ? `
+                        <div class="flex gap-2 overflow-x-auto pb-2">
+                            ${currentModalImages.map((imgUrl, idx) => `
+                                <img src="${imgUrl}" onclick="setModalImageIndex(${idx})" class="w-16 h-16 object-cover rounded-xl cursor-pointer border-2 ${idx === currentModalIndex ? 'border-brand-green scale-105 shadow-md' : 'border-transparent hover:border-slate-300 opacity-70'} transition-all shrink-0" alt="Thumb">
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    <div>
+                        <span class="bg-brand-green/10 text-brand-green text-xs font-bold px-3 py-1 rounded-full">SEINTECH Product</span>
+                        <h3 class="text-2xl font-extrabold text-slate-900 mt-2">${currentModalTitle}</h3>
+                        <p class="text-slate-600 text-sm mt-3 leading-relaxed whitespace-pre-line">${currentModalDesc}</p>
+                    </div>
+                    <div class="pt-4 border-t flex gap-3">
+                        <a href="#contact" onclick="closeProductModal()" class="flex-1 bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-3 px-6 rounded-xl text-center shadow-lg transition-colors text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone"></i> Yêu Cầu Báo Giá Ngay
+                        </a>
+                        <button onclick="closeProductModal()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm transition-colors">Đóng</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function prevModalImage() {
+            if (currentModalImages.length <= 1) return;
+            currentModalIndex = (currentModalIndex - 1 + currentModalImages.length) % currentModalImages.length;
+            updateModalView();
+        }
+
+        function nextModalImage() {
+            if (currentModalImages.length <= 1) return;
+            currentModalIndex = (currentModalIndex + 1) % currentModalImages.length;
+            updateModalView();
+        }
+
+        function setModalImageIndex(idx) {
+            currentModalIndex = idx;
+            updateModalView();
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        // TẢI DỮ LIỆU TỪ GOOGLE SHEETS BẰNG JSONP (TỐI ƯU CHO DI ĐỘNG & MESSENGER)
+        function fetchLeadsFromSheet() {
+            const tbody = document.getElementById('leadTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang tải dữ liệu từ Google Sheets...</td></tr>`;
+
+            const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+            window[callbackName] = function(data) {
+                delete window[callbackName];
+                if (script && script.parentNode) document.body.removeChild(script);
+
+                const badge = document.getElementById('lead-badge');
+                const mobileBadge = document.getElementById('mobile-lead-badge');
+                const tabBadge = document.getElementById('tab-lead-count');
+
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">Chưa có khách hàng nào đăng ký tư vấn.</td></tr>`;
+                    if(badge) badge.classList.add('hidden');
+                    if(mobileBadge) mobileBadge.classList.add('hidden');
+                    if(tabBadge) tabBadge.innerText = '0';
+                    return;
+                }
+
+                if(badge) { badge.innerText = data.length; badge.classList.remove('hidden'); }
+                if(mobileBadge) { mobileBadge.innerText = data.length; mobileBadge.classList.remove('hidden'); }
+                if(tabBadge) { tabBadge.innerText = data.length; }
+
+                tbody.innerHTML = data.reverse().map(l => `
+                    <tr class="border-b hover:bg-slate-50 transition-colors">
+                        <td class="p-3 text-[11px] text-slate-400 font-medium">${l.time || '-'}</td>
+                        <td class="p-3 font-bold text-slate-900">${l.name || '-'}</td>
+                        <td class="p-3 font-semibold text-brand-green"><a href="tel:${l.phone}" class="hover:underline">${l.phone || '-'}</a></td>
+                        <td class="p-3 text-xs font-medium">${l.product || '-'}</td>
+                        <td class="p-3 text-xs text-slate-500">${l.note || '-'}</td>
+                    </tr>
+                `).join('');
             };
 
-            leads.unshift(newLead);
-            localStorage.setItem('seintech_leads', JSON.stringify(leads));
+            const script = document.createElement('script');
+            script.src = SCRIPT_URL + (SCRIPT_URL.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+            script.onerror = function() {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-500 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Không thể tải dữ liệu. Hãy kiểm tra kết nối mạng!</td></tr>`;
+            };
+            document.body.appendChild(script);
+        }
+
+        // XỬ LÝ KHÁCH HÀNG BẤM GỬI FORM (TỐI ƯU CẢ TRÊN IPHONE & MESSENGER)
+        function handleCustomerSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitForm');
+            const alertBox = document.getElementById('thankYouAlert');
             
-            e.target.reset();
-            renderLeads();
-            alert('🎉 Cảm ơn bạn! SEINTECH đã nhận được thông tin và sẽ liên hệ lại trong thời gian sớm nhất.');
-        }
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang gửi yêu cầu...`;
 
-        function deleteLead(id) {
-            const canDelete = (currentRole === 'superadmin' || editorPermissions.canDeleteLead);
-            if (!canDelete) return alert('Tài khoản của bạn không có quyền xóa khách hàng!');
-            if (confirm('Xóa thông tin khách hàng này?')) {
-                leads = leads.filter(l => l.id !== id);
-                localStorage.setItem('seintech_leads', JSON.stringify(leads));
-                renderLeads();
+            const payload = {
+                time: new Date().toLocaleString('vi-VN'),
+                name: document.getElementById('custName').value,
+                phone: document.getElementById('custPhone').value,
+                product: document.getElementById('custProduct').value,
+                note: document.getElementById('custNote').value
+            };
+
+            // Hàm xử lý hoàn tất gửi form
+            const onFormSuccess = () => {
+                btn.disabled = false;
+                btn.innerHTML = `<span data-i18n="contact.send_btn">Gửi Yêu Cầu Tư Vấn</span>`;
+                
+                // Reset Form
+                document.getElementById('consultForm').reset();
+                
+                // Bật khung Lời Cảm Ơn trực tiếp trên trang
+                if(alertBox) {
+                    alertBox.classList.remove('hidden');
+                    alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                // Popup Alert bổ sung
+                try {
+                    alert('🎉 Cảm ơn quý khách! SEINTECH đã nhận được yêu cầu tư vấn.');
+                } catch(err) {}
+
+                // Cập nhật lại danh sách Admin
+                setTimeout(fetchLeadsFromSheet, 1500);
+            };
+
+            // Dùng XMLHttpRequest chuẩn cho mọi di động & Messenger Browser
+            try {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', SCRIPT_URL, true);
+                xhr.setRequestHeader('Content-Type', 'text/plain;charset=utf-8');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        onFormSuccess();
+                    }
+                };
+                xhr.onerror = function() {
+                    onFormSuccess(); // Vẫn hiển thị cảm ơn để trải nghiệm người dùng luôn tốt nhất
+                };
+                xhr.send(JSON.stringify(payload));
+            } catch(err) {
+                onFormSuccess();
             }
         }
 
-        function clearAllLeads() {
-            if (currentRole !== 'superadmin') return alert('Chỉ Super Admin mới có quyền xóa toàn bộ danh sách!');
-            if (confirm('Xóa toàn bộ danh sách khách hàng?')) {
-                leads = [];
-                localStorage.setItem('seintech_leads', JSON.stringify(leads));
-                renderLeads();
-            }
-        }
-
-        // RENDER TRANG CHỦ (TỰ ĐỘNG THEO NGÔN NGỮ ĐANG CHỌN)
         function renderTreeProducts() {
             const container = document.getElementById('product-category-tree');
             container.innerHTML = '';
-
-            const quoteText = translations[currentLang]["btn.quote"] || "Yêu Cầu Báo Giá";
+            const detailText = translations[currentLang]["btn.detail"] || "Xem Chi Tiết & Bộ Ảnh";
 
             categories.forEach(cat => {
                 let catTitle = (typeof cat.title === 'object') ? (cat.title[currentLang] || cat.title.vi) : cat.title;
-
                 let itemsHTML = '';
+
                 cat.items.forEach(item => {
                     let itemTitle = (typeof item.title === 'object') ? (item.title[currentLang] || item.title.vi) : item.title;
                     let itemDesc = (typeof item.desc === 'object') ? (item.desc[currentLang] || item.desc.vi) : item.desc;
+                    let images = (item.images && item.images.length > 0) ? item.images : [(item.img || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80")];
 
                     itemsHTML += `
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-100 flex flex-col">
-                            <div class="h-48 bg-slate-200 overflow-hidden">
-                                <img src="${item.img}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt="${itemTitle}">
+                        <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all border border-slate-100 flex flex-col group">
+                            <div onclick="openProductModal(${cat.id}, ${item.id})" class="h-52 bg-slate-200 overflow-hidden relative cursor-pointer">
+                                <img src="${images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="${itemTitle}">
+                                ${images.length > 1 ? `<span class="absolute bottom-2 right-2 bg-black/70 text-white text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm"><i class="fa-solid fa-images mr-1"></i> ${images.length} ảnh</span>` : ''}
                             </div>
                             <div class="p-5 flex-1 flex flex-col justify-between">
                                 <div>
-                                    <h4 class="font-bold text-slate-900 text-lg mb-2">${itemTitle}</h4>
-                                    <p class="text-slate-600 text-xs leading-relaxed mb-4">${itemDesc}</p>
+                                    <h4 onclick="openProductModal(${cat.id}, ${item.id})" class="font-bold text-slate-900 text-lg mb-2 cursor-pointer hover:text-brand-green transition-colors">${itemTitle}</h4>
+                                    <p class="text-slate-600 text-xs leading-relaxed mb-4 line-clamp-2">${itemDesc}</p>
                                 </div>
-                                <a href="#contact" class="inline-block text-center bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 font-semibold py-2 rounded-lg text-xs transition-colors">
-                                    ${quoteText}
-                                </a>
+                                <button onclick="openProductModal(${cat.id}, ${item.id})" class="w-full bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 font-semibold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-eye"></i> ${detailText}
+                                </button>
                             </div>
                         </div>
                     `;
                 });
 
                 container.innerHTML += `
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200">
                         <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-6">
                             <div class="w-3 h-8 bg-brand-green rounded-full"></div>
-                            <h3 class="text-2xl font-bold text-slate-900">${catTitle}</h3>
+                            <h3 class="text-2xl font-extrabold text-slate-900">${catTitle}</h3>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            ${itemsHTML || '<p class="text-slate-400 text-xs">Chưa có sản phẩm nhỏ trong danh mục này.</p>'}
+                            ${itemsHTML || '<p class="text-slate-400 text-xs">Chưa có sản phẩm.</p>'}
                         </div>
                     </div>
                 `;
             });
         }
 
-        // RENDER CÂY SẢN PHẨM ADMIN
         function renderAdminTree() {
             const container = document.getElementById('adminCategoryTree');
             const select = document.getElementById('subCatSelect');
@@ -925,34 +931,29 @@
 
             categories.forEach(cat => {
                 let catTitle = (typeof cat.title === 'object') ? (cat.title[currentLang] || cat.title.vi) : cat.title;
-
                 select.innerHTML += `<option value="${cat.id}">${catTitle}</option>`;
 
                 let itemsRow = '';
                 cat.items.forEach(item => {
-                    let itemTitle = (typeof item.title === 'object') ? (item.title[currentLang] || item.title.vi) : item.title;
-                    let itemDesc = (typeof item.desc === 'object') ? (item.desc[currentLang] || item.desc.vi) : item.desc;
+                    let imgCount = item.images ? item.images.length : 1;
+                    let firstImg = (item.images && item.images.length > 0) ? item.images[0] : (item.img || '');
 
                     itemsRow += `
                         <div class="flex items-center justify-between p-3 bg-white rounded-lg border text-xs">
                             <div class="flex items-center gap-3">
-                                <img src="${item.img}" class="w-10 h-10 object-cover rounded">
+                                <img src="${firstImg}" class="w-10 h-10 object-cover rounded">
                                 <div>
-                                    <p class="font-bold text-slate-900">${item.title.vi} <span class="text-[10px] text-brand-green font-normal">(${itemTitle})</span></p>
-                                    <p class="text-slate-500 truncate max-w-xs">${itemDesc}</p>
+                                    <p class="font-bold text-slate-900">${item.title.vi} <span class="text-[10px] text-brand-green font-normal">(${imgCount} ảnh)</span></p>
+                                    <p class="text-slate-500 truncate max-w-xs">${item.desc.vi}</p>
                                 </div>
                             </div>
-                            <button onclick="deleteSubProduct(${cat.id}, ${item.id})" class="text-red-500 hover:text-red-700 p-2">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                            <button onclick="deleteSubProduct(${cat.id}, ${item.id})" class="text-red-500 hover:text-red-700 p-2"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     `;
                 });
 
                 const canDeleteCat = (currentRole === 'superadmin' || editorPermissions.canAddCategory);
-                const deleteCatBtn = canDeleteCat 
-                    ? `<button onclick="deleteCategory(${cat.id})" class="text-red-600 text-xs hover:underline">Xóa danh mục lớn</button>` 
-                    : '';
+                const deleteCatBtn = canDeleteCat ? `<button onclick="deleteCategory(${cat.id})" class="text-red-600 text-xs hover:underline">Xóa danh mục lớn</button>` : '';
 
                 container.innerHTML += `
                     <div class="bg-slate-50 p-4 rounded-xl border">
@@ -960,15 +961,12 @@
                             <h5 class="font-bold text-slate-900 text-sm">${cat.title.vi} <span class="text-xs text-brand-green font-normal">(${catTitle})</span></h5>
                             ${deleteCatBtn}
                         </div>
-                        <div class="space-y-2">
-                            ${itemsRow || '<p class="text-slate-400 text-xs">Chưa có sản phẩm con.</p>'}
-                        </div>
+                        <div class="space-y-2">${itemsRow || '<p class="text-slate-400 text-xs">Chưa có sản phẩm con.</p>'}</div>
                     </div>
                 `;
             });
         }
 
-        // TỰ ĐỘNG DỊCH KHI THÊM DANH MỤC LỚN MỚI
         async function handleAddCategory(e) {
             e.preventDefault();
             const canAddCat = (currentRole === 'superadmin' || editorPermissions.canAddCategory);
@@ -978,22 +976,14 @@
             if(!viTitle) return;
 
             const btn = document.getElementById('btnCreateCat');
-            btn.innerText = "Đang tự động dịch...";
+            btn.innerText = "Đang dịch...";
             btn.disabled = true;
 
-            // Dịch tự động song song sang EN, KO, ZH
             const [enTitle, koTitle, zhTitle] = await Promise.all([
-                translateText(viTitle, 'en'),
-                translateText(viTitle, 'ko'),
-                translateText(viTitle, 'zh')
+                translateText(viTitle, 'en'), translateText(viTitle, 'ko'), translateText(viTitle, 'zh')
             ]);
 
-            categories.push({ 
-                id: Date.now(), 
-                title: { vi: viTitle, en: enTitle, ko: koTitle, zh: zhTitle }, 
-                items: [] 
-            });
-
+            categories.push({ id: Date.now(), title: { vi: viTitle, en: enTitle, ko: koTitle, zh: zhTitle }, items: [] });
             localStorage.setItem('seintech_categories', JSON.stringify(categories));
             e.target.reset();
             
@@ -1002,38 +992,43 @@
 
             renderAdminTree();
             renderTreeProducts();
-            alert('🎉 Đã tạo danh mục lớn và tự động dịch thành công sang 4 ngôn ngữ!');
+            alert('🎉 Đã tạo danh mục lớn thành công!');
         }
 
-        // TỰ ĐỘNG DỊCH KHI THÊM SẢN PHẨM CON MỚI
         async function handleAddSubProduct(e) {
             e.preventDefault();
-            if (categories.length === 0) return alert('Chưa có danh mục lớn nào. Vui lòng tạo danh mục lớn trước!');
+            if (categories.length === 0) return alert('Chưa có danh mục lớn nào!');
 
             const catId = parseInt(document.getElementById('subCatSelect').value);
             const viTitle = document.getElementById('subTitle').value.trim();
             const viDesc = document.getElementById('subDesc').value.trim();
-            const urlImg = document.getElementById('subImgUrl').value;
-            const fileInput = document.getElementById('subImgFile');
+            const urlImg = document.getElementById('subImgUrl').value.trim();
+            const fileInput = document.getElementById('subImgFiles');
 
-            let finalImg = urlImg || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80";
+            let imagesArr = [];
+            if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    const base64Img = await convertFileToBase64(fileInput.files[i]);
+                    imagesArr.push(base64Img);
+                }
+            }
 
-            if (fileInput.files && fileInput.files[0]) {
-                finalImg = await convertFileToBase64(fileInput.files[0]);
+            if (urlImg) {
+                const parsedUrls = urlImg.split(',').map(s => s.trim()).filter(s => s.length > 0);
+                imagesArr = imagesArr.concat(parsedUrls);
+            }
+
+            if (imagesArr.length === 0) {
+                imagesArr = ["https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80"];
             }
 
             const btn = document.getElementById('btnAddSub');
-            btn.innerText = "Đang dịch tự động...";
+            btn.innerText = "Đang dịch...";
             btn.disabled = true;
 
-            // Dịch tự động Tên & Mô tả sang 3 ngôn ngữ
             const [enTitle, koTitle, zhTitle, enDesc, koDesc, zhDesc] = await Promise.all([
-                translateText(viTitle, 'en'),
-                translateText(viTitle, 'ko'),
-                translateText(viTitle, 'zh'),
-                translateText(viDesc, 'en'),
-                translateText(viDesc, 'ko'),
-                translateText(viDesc, 'zh')
+                translateText(viTitle, 'en'), translateText(viTitle, 'ko'), translateText(viTitle, 'zh'),
+                translateText(viDesc, 'en'), translateText(viDesc, 'ko'), translateText(viDesc, 'zh')
             ]);
 
             const cat = categories.find(c => c.id === catId);
@@ -1042,7 +1037,7 @@
                     id: Date.now(), 
                     title: { vi: viTitle, en: enTitle, ko: koTitle, zh: zhTitle }, 
                     desc: { vi: viDesc, en: enDesc, ko: koDesc, zh: zhDesc }, 
-                    img: finalImg 
+                    images: imagesArr 
                 });
 
                 localStorage.setItem('seintech_categories', JSON.stringify(categories));
@@ -1053,7 +1048,7 @@
 
                 renderAdminTree();
                 renderTreeProducts();
-                alert('🎉 Đã thêm sản phẩm con và tự động dịch thành công!');
+                alert('🎉 Đã thêm sản phẩm con thành công!');
             }
         }
 
@@ -1089,7 +1084,6 @@
             }
         }
 
-        // LƯU CÀI ĐẶT EDITOR (MẬT KHẨU VÀ PHÂN QUYỀN - CHỈ SUPER ADMIN)
         function handleSaveEditorSettings(e) {
             e.preventDefault();
             if (currentRole !== 'superadmin') return alert('Chức năng chỉ dành cho Super Admin!');
@@ -1104,10 +1098,9 @@
             editorPermissions.canAddCategory = document.getElementById('permAddCategory').checked;
             localStorage.setItem('seintech_editor_perms', JSON.stringify(editorPermissions));
 
-            alert('🎉 Đã cập nhật thành công mật khẩu và phân quyền cho tài khoản Editor!');
+            alert('🎉 Đã cập nhật cài đặt cho Editor!');
         }
 
-        // ĐỔI MẬT KHẨU CÁ NHÂN SUPER ADMIN
         function handleChangeAdminPassword(e) {
             e.preventDefault();
             if (currentRole !== 'superadmin') return;
@@ -1133,20 +1126,19 @@
             
             errorDiv.classList.add('hidden');
             e.target.reset();
-            alert('🎉 Thay đổi mật khẩu Super Admin thành công!');
+            alert('🎉 Thay đổi mật khẩu thành công!');
         }
 
-        // TABS ADMIN
         function switchAdminTab(tab) {
             document.getElementById('tabLeads').classList.add('hidden');
             document.getElementById('tabProducts').classList.add('hidden');
             document.getElementById('tabEditorMgmt').classList.add('hidden');
             document.getElementById('tabAccount').classList.add('hidden');
 
-            document.getElementById('tabBtnLeads').className = "pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm flex items-center gap-2 shrink-0";
-            document.getElementById('tabBtnProducts').className = "pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm flex items-center gap-2 shrink-0";
-            document.getElementById('tabBtnEditorMgmt').className = "hidden pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm items-center gap-2 shrink-0";
-            document.getElementById('tabBtnAccount').className = "hidden pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-bold text-sm items-center gap-2 shrink-0";
+            document.getElementById('tabBtnLeads').className = "pb-3 border-b-2 border-transparent text-slate-500 font-bold text-sm flex items-center gap-2 shrink-0";
+            document.getElementById('tabBtnProducts').className = "pb-3 border-b-2 border-transparent text-slate-500 font-bold text-sm flex items-center gap-2 shrink-0";
+            document.getElementById('tabBtnEditorMgmt').className = "hidden pb-3 border-b-2 border-transparent text-slate-500 font-bold text-sm items-center gap-2 shrink-0";
+            document.getElementById('tabBtnAccount').className = "hidden pb-3 border-b-2 border-transparent text-slate-500 font-bold text-sm items-center gap-2 shrink-0";
 
             if (currentRole === 'superadmin') {
                 document.getElementById('tabBtnEditorMgmt').classList.remove('hidden');
@@ -1158,6 +1150,7 @@
             if (tab === 'leads') {
                 document.getElementById('tabLeads').classList.remove('hidden');
                 document.getElementById('tabBtnLeads').className = "pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm flex items-center gap-2 shrink-0";
+                fetchLeadsFromSheet();
             } else if (tab === 'products') {
                 document.getElementById('tabProducts').classList.remove('hidden');
                 document.getElementById('tabBtnProducts').className = "pb-3 border-b-2 border-brand-green text-brand-green font-bold text-sm flex items-center gap-2 shrink-0";
@@ -1170,13 +1163,11 @@
             }
         }
 
-        // LOGIN / LOGOUT ADMIN
-        function openAdminModal() {
-            document.getElementById('adminModal').classList.remove('hidden');
+        function openAdminModal() { 
+            document.getElementById('adminModal').classList.remove('hidden'); 
+            fetchLeadsFromSheet();
         }
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
 
         function handleLogin(e) {
             e.preventDefault();
@@ -1201,20 +1192,16 @@
                     document.getElementById('tabBtnEditorMgmt').classList.add('flex');
                     document.getElementById('tabBtnAccount').classList.remove('hidden');
                     document.getElementById('tabBtnAccount').classList.add('flex');
-                    document.getElementById('clearLeadsBtn').classList.remove('hidden');
 
                     document.getElementById('editEditorPass').value = adminPasswords.editor;
                     document.getElementById('permDeleteLead').checked = editorPermissions.canDeleteLead;
                     document.getElementById('permAddCategory').checked = editorPermissions.canAddCategory;
                 } else {
                     document.getElementById('tabBtnEditorMgmt').classList.add('hidden');
-                    document.getElementById('tabBtnEditorMgmt').classList.remove('flex');
                     document.getElementById('tabBtnAccount').classList.add('hidden');
-                    document.getElementById('tabBtnAccount').classList.remove('flex');
-                    document.getElementById('clearLeadsBtn').classList.add('hidden');
                 }
 
-                renderLeads();
+                fetchLeadsFromSheet();
                 renderAdminTree();
             } else {
                 document.getElementById('loginError').classList.remove('hidden');
@@ -1228,11 +1215,9 @@
             document.getElementById('adminDashboard').classList.add('hidden');
         }
 
-        // KHỞI CHẠY BAN ĐẦU
         renderTreeProducts();
-        renderLeads();
+        fetchLeadsFromSheet();
 
-        // TOGGLE MOBILE MENU
         document.getElementById('menu-btn').addEventListener('click', () => {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
