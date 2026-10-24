@@ -770,7 +770,7 @@
         }
 
         // TẢI DỮ LIỆU TỪ GOOGLE SHEETS BẰNG JSONP (TỐI ƯU CHO DI ĐỘNG & MESSENGER)
-        function fetchLeadsFromSheet() {
+function fetchLeadsFromSheet() {
             const tbody = document.getElementById('leadTableBody');
             if (!tbody) return;
 
@@ -811,7 +811,7 @@
             const script = document.createElement('script');
             script.src = SCRIPT_URL + (SCRIPT_URL.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
             script.onerror = function() {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-500 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Không thể tải dữ liệu. Hãy kiểm tra kết nối mạng!</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-500 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Không thể tải dữ liệu từ Google Sheets.</td></tr>`;
             };
             document.body.appendChild(script);
         }
